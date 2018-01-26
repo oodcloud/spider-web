@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsoft.spider.business.common.spider.bbs.mapper.BbsMapper">
+
+    <insert id="add">
+        INSERT  INTO bbs_site_comment(time,text,title,author)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.time},
+            #{item.text},
+            #{item.title},
+            #{item.author}
+            )
+        </foreach>
+    </insert>
+    <insert id="addSingle">
+        INSERT  INTO bbs_site_comment(time,text,title,author)
+        VALUES
+            (
+            #{time},
+            #{text},
+            #{title},
+            #{author}
+            )
+    </insert>
+</mapper>

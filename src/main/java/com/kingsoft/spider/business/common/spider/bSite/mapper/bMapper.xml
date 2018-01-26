@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsoft.spider.business.common.spider.bSite.mapper.bMapper">
+
+    <insert id="xmqzAdd">
+        INSERT  INTO b_site_xmqz_comment(time,text,type,title,author)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.time},
+            #{item.text},
+            #{item.type},
+            #{item.title},
+            #{item.author}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="extopiaAdd">
+        INSERT  INTO b_site_extopia_comment(time,text,type,title,author)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.time},
+            #{item.text},
+            #{item.type},
+            #{item.title},
+            #{item.author}
+            )
+        </foreach>
+    </insert>
+
+
+    <insert id="matAdd">
+        INSERT  INTO b_site_mat_comment(time,text,type,title,author)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.time},
+            #{item.text},
+            #{item.type},
+            #{item.title},
+            #{item.author}
+            )
+        </foreach>
+    </insert>
+    <insert id="xmqzSingleAdd">
+        INSERT  INTO b_site_xmqz_comment(time,text,type,title,author)
+        VALUES
+            (
+            #{time},
+            #{text},
+            #{type},
+            #{title},
+            #{author}
+            )
+    </insert>
+    <insert id="extopiaSingleAdd">
+         INSERT  INTO b_site_extopia_comment(time,text,type,title,author)
+        VALUES
+            (
+            #{time},
+            #{text},
+            #{type},
+            #{title},
+            #{author}
+            )
+    </insert>
+    <insert id="matSingleAdd">
+         INSERT  INTO b_site_mat_comment(time,text,type,title,author)
+        VALUES
+            (
+            #{time},
+            #{text},
+            #{type},
+            #{title},
+            #{author}
+            )
+    </insert>
+
+
+</mapper>

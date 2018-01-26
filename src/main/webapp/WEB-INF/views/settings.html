@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::div})">
+
+<div>
+    <div class="col-md-9"></div>
+    <div class="col-md-3">
+        <div class="btn-group">
+            <button type="button" onclick="window.open('druid.html')"  class="btn btn-purple">druid监控</button>
+        </div>
+    </div>
+    <div class="col-md-12">
+
+        <div class="tabs-vertical-env">
+
+            <ul class="nav tabs-vertical">
+                <li class=""><a href="#v-changepassword" data-toggle="tab">修改密码</a></li>
+                <li class=""><a href="#v-user" data-toggle="tab">用户管理</a></li>
+                <li class=""><a href="#v-role" data-toggle="tab">角色管理</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane" id="v-changepassword">
+                 <div th:replace="~{core/changepassword/index :: body}"></div>
+                </div>
+                <div class="tab-pane" id="v-user">
+                  <th:block th:replace="~{common/developing :: strive}"></th:block>
+                </div>
+                <div class="tab-pane" id="v-role">
+                    <th:block th:replace="~{common/developing :: strive}"></th:block>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</html>

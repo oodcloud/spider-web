@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::div})">
+<div>
+    <!--引用文件放在头-->
+    <link rel="stylesheet" href="/assets/js/daterangepicker/daterangepicker-bs3.css"
+          th:href="@{/assets/js/daterangepicker/daterangepicker-bs3.css}">
+    <script src="/assets/js/datepicker/bootstrap-datepicker.js"
+            th:src="@{/assets/js/datepicker/bootstrap-datepicker.js}"></script>
+
+    <ol class="breadcrumb  bc-3">
+        <li>
+            <a href="/generic/index.html" th:href="@{/generic/index.html}" class="collapsed" style="width: 51px;"><i
+                    class="fa-home"></i>Home</a>
+        </li>
+        <li class="active">
+            <strong>导出表</strong>
+        </li>
+    </ol>
+    <form role="form" class="form-horizontal" action="/generic/import/import.html"
+          th:action="@{/generic/import/import.html}" method="post">
+        <div class="form-group-separator"></div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">查询生成Excel</label>
+
+            <div class="col-sm-2">
+                <div class="input-group">
+                    <input type="text" name="start" class="form-control datepicker" data-format="yyyy-mm-dd">
+
+                    <div class="input-group-addon">
+                        <a href="#"><i class="linecons-calendar"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="input-group">
+                    <input type="text" name="end" class="form-control datepicker" data-format="yyyy-mm-dd">
+
+                    <div class="input-group-addon">
+                        <a href="#"><i class="linecons-calendar"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <select class="form-control" id="sboxit-1" name="type">
+                    <option value="1">自由禁区微博</option>
+                    <option value="2">小米枪战微博</option>
+                    <option value="3">反恐行动微博</option>
+                    <option value="4">自由禁区论坛</option>
+                    <option value="5">自由禁区B站</option>
+                    <option value="6">小米枪战B站</option>
+                    <option value="7">反恐行动B站</option>
+                    <option value="8">自由禁区贴吧</option>
+                    <option value="9">小米枪战贴吧</option>
+                    <option value="10">反恐行动贴吧</option>
+                    <option value="11">制作人微博</option>
+                    <option value="12">自由禁区微信</option>
+                    <!--<option value="13">小米枪战微信</option>-->
+                    <!--<option value="14">反恐行动微信</option>-->
+                </select>
+            </div>
+            <button class="btn btn-primary btn-icon btn-icon-standalone">
+                <i class="fa-download"></i>
+                <span>下载</span>
+            </button>
+        </div>
+    </form>
+    <blockquote class="blockquote blockquote-default">
+        <p>
+            <strong>提示</strong>
+        </p>
+        <p>
+            <small>导出表中的时间范围是根据评论时间作为检索条件</small>
+        </p>
+    </blockquote>
+</div>
+</div>
+</html>

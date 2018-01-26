@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="大连-西山居 爬虫系统"/>
+    <meta name="author" content=""/>
+    <title>西山居 爬虫- 后台</title>
+    <link rel="icon" href="/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}" type="image/x-icon"/>
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}"
+          type="image/x-icon"/>
+    <link rel="bookmark" href="/assets/images/favicon.ico" th:href="@{/assets/images/favicon.ico}" type="image/x-icon"/>
+
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic">
+    <link rel="stylesheet" href="/assets/css/fonts/linecons/css/linecons.css"
+          th:href="@{/assets/css/fonts/linecons/css/linecons.css}">
+    <link rel="stylesheet" href="/assets/css/fonts/fontawesome/css/font-awesome.min.css"
+          th:href="@{/assets/css/fonts/fontawesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css" th:href="@{/assets/css/bootstrap.css}">
+    <link rel="stylesheet" href="/assets/css/xenon-core.css" th:href="@{/assets/css/xenon-core.css}">
+    <link rel="stylesheet" href="/assets/css/xenon-forms.css" th:href="@{/assets/css/xenon-forms.css}">
+    <link rel="stylesheet" href="/assets/css/xenon-components.css" th:href="@{/assets/css/xenon-components.css}">
+    <link rel="stylesheet" href="/assets/css/xenon-skins.css" th:href="@{/assets/css/xenon-skins.css}">
+    <link rel="stylesheet" href="/assets/css/custom.css" th:href="@{/assets/css/custom.css}">
+    <script src="/assets/js/jquery-1.11.1.min.js" th:src="@{/assets/js/jquery-1.11.1.min.js}"/>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+</head>
+<body class="page-body login-page">
+<div class="login-container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="errors-container">
+            </div>
+            <form method="post" role="form" id="login" class="login-form fade-in-effect">
+                <div class="login-header">
+                    <a href="dashboard-1.html" class="logo">
+                        <img src="/assets/images/logo@2x.gif" th:src="@{/assets/images/logo@2x.gif}" alt="" width="80"/>
+                        <span>登录</span>
+                    </a>
+                    <p>亲爱的用户，欢迎来到爬虫管理后台!</p>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="username">Username</label>
+                    <input type="text" class="form-control input-dark" name="username" id="username" value="admin"
+                           autocomplete="off"/>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="passwd">Password</label>
+                    <input type="password" class="form-control input-dark" name="passwd" id="passwd" value="admin"
+                           autocomplete="off"/>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-dark  btn-block text-left">
+                        <i class="fa-lock"></i>
+                        登录
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script src="/assets/js/TweenMax.min.js" th:src="@{/assets/js/TweenMax.min.js}"></script>
+<script src="/assets/js/resizeable.js" th:src="@{/assets/js/resizeable.js}"></script>
+<script src="/assets/js/joinable.js" th:src="@{/assets/js/joinable.js}"></script>
+<script src="/assets/js/xenon-api.js" th:src="@{/assets/js/xenon-api.js}"></script>
+<script src="/assets/js/xenon-toggles.js" th:src="@{/assets/js/xenon-toggles.js}"></script>
+<script src="/assets/js/jquery-validate/jquery.validate.min.js"
+        th:src="@{/assets/js/jquery-validate/jquery.validate.min.js}"></script>
+<script src="/assets/js/toastr/toastr.min.js" th:src="@{/assets/js/toastr/toastr.min.js}"></script>
+<script src="/assets/js/xenon-custom.js" th:src="@{/assets/js/xenon-custom.js}"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        setTimeout(function () {
+            $(".fade-in-effect").addClass('in');
+        }, 500);
+    });
+    $("form#login").validate({
+        rules: {
+            username: {
+                required: true
+            },
+
+            passwd: {
+                required: true
+            }
+        },
+        messages: {
+            username: {
+                required: '请输入您的账号.'
+            },
+            passwd: {
+                required: '请输入您的密码.'
+            }
+        },
+        submitHandler: function (form) {
+            show_loading_bar(70);
+            var opts = {
+                "closeButton": true,
+                "debug": false,
+                "positionClass": "toast-top-full-width",
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            $.ajax({
+                url: "user-check.html",
+                method: 'POST',
+                dataType: 'text',
+                data: {
+                    do_login: true,
+                    username: $(form).find('#username').val(),
+                    password: $(form).find('#passwd').val()
+                },
+                success: function (resp) {
+                    show_loading_bar({
+                        delay: .5,
+                        pct: 100,
+                        finish: function () {
+                            console.log(JSON.parse(resp).data[0].statusCode);
+                            if (JSON.parse(resp).data[0].statusCode==="200") {
+                                window.location.href = 'generic/index.html';
+                            } else {
+                                toastr.error("<strong>"+JSON.parse(resp).data[0].statusContent+"</strong> :)", "登录失败", opts);
+                                $(form).find('#passwd').select();
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    });
+    $("form#login .form-group:has(.form-control):first .form-control").focus();
+</script>
+</body>
+</html>

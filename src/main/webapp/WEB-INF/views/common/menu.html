@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--菜单列表-->
+<th:block th:fragment="content">
+    <li>
+        <a href="#">
+            <i class="linecons-cog"></i>
+            <span class="title">采集</span>
+        </a>
+        <ul>
+            <li>
+                <a href="/generic/config/index.html" th:href="@{/generic/config/index.html}" >
+                    <span class="title">采集配置</span>
+                </a>
+            </li>
+            <li>
+                <a href="/generic/config/index.html" th:href="@{/generic/config/index.html}" >
+                    <span class="title">配置列表</span>
+                </a>
+            </li>
+            <li>
+                <a href="/generic/index.html" th:href="@{/generic/index.html}" >
+                    <span class="title">在线采集</span>
+                </a>
+            </li>
+            <li>
+                <a href="/generic/index.html" th:href="@{/generic/index.html}" >
+                    <span class="title">定时采集</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="/generic/index.html" th:href="@{/generic/index.html}" >
+            <i class="linecons-desktop"></i>
+            <span class="title">数据</span>
+        </a>
+        <ul>
+            <li>
+                <a href="/generic/index.html" th:href="@{/generic/index.html}" >
+                    <span class="title">数据管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="/generic/index.html" th:href="@{/generic/index.html}" >
+                    <span class="title">数据监控</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="/generic/import/index.html" th:href="@{/generic/import/index.html}">
+            <i class="linecons-beaker"></i>
+            <span class="title">导出表</span>
+        </a>
+    </li>
+
+
+
+</th:block>

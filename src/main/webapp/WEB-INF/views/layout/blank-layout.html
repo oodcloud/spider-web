@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:fragment="common(div)">
+<head th:replace="~{common/header :: head}"></head>
+<body class="page-body">
+<div class="page-container">
+    <div class="main-content">
+        <th:block th:replace="${div}" />
+        <div th:replace="~{common/footer :: copy}"></div>
+    </div>
+</div>
+<script src="/assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script src="/assets/js/TweenMax.min.js" th:src="@{/assets/js/TweenMax.min.js}"></script>
+<script src="/assets/js/resizeable.js" th:src="@{/assets/js/resizeable.js}"></script>
+<script src="/assets/js/joinable.js" th:src="@{/assets/js/joinable.js}"></script>
+<script src="/assets/js/xenon-api.js" th:src="@{/assets/js/xenon-api.js}"></script>
+<script src="/assets/js/xenon-toggles.js" th:src="@{/assets/js/xenon-toggles.js}"></script>
+<script src="/assets/js/xenon-custom.js" th:src="@{/assets/js/xenon-custom.js}"></script>
+
+</body>
+</html>

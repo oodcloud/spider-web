@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--fixed-->
+<div class="sidebar-menu toggle-others " th:fragment="sidebar-menu">
+    <div class="sidebar-menu-inner">
+        <ul id="main-menu" class="main-menu">
+            <th:block th:insert="~{common/menu :: content}">
+            </th:block>
+        </ul>
+    </div>
+</div>

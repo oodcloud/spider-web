@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::div})">
+<div>
+
+    <link rel="stylesheet" href="/assets/css/fonts/meteocons/css/meteocons.css"
+          th:href="@{/assets/css/fonts/meteocons/css/meteocons.css}">
+    <script src="/assets/js/xenon-widgets.js" th:src="@{/assets/js/xenon-widgets.js}"></script>
+
+    <div class="col-sm-3">
+        <div class="xe-widget xe-counter xe-counter-info" data-count=".num"
+             data-duration="4" data-easing="true"  data-from="0"  th:attr="data-to= ${dataCount.tiebaExtopiaCommentCount}">
+            <div class="xe-icon">
+                <i class="fa-line-chart"></i>
+            </div>
+            <div class="xe-label">
+                <strong class="num" th:text="${dataCount.tiebaExtopiaCommentCount}"></strong>
+                <span>自由禁区贴吧评论总数</span>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="xe-widget xe-counter xe-counter-info" data-count=".num" data-from="0" th:attr="data-to= ${dataCount.tiebaXmqzCommentCount}"
+             data-duration="4" data-easing="true">
+            <div class="xe-icon">
+                <i class="fa-line-chart"></i>
+            </div>
+            <div class="xe-label">
+                <strong class="num" th:text="${dataCount.tiebaXmqzCommentCount}"></strong>
+                <span>小米枪战贴吧评论总数</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="xe-widget xe-counter xe-counter-info" data-count=".num" data-from="0" th:attr="data-to= ${dataCount.tiebaMatCommentCount}"
+             data-duration="4" data-easing="true">
+            <div class="xe-icon">
+                <i class="fa-line-chart"></i>
+            </div>
+            <div class="xe-label">
+                <strong class="num" th:text="${dataCount.tiebaMatCommentCount}"></strong>
+                <span>反恐行动贴吧评论总数</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="xe-widget xe-counter xe-counter-info" data-count=".num" data-from="0" th:attr="data-to= ${dataCount.weiboExtopiaCommentCount}"
+             data-duration="4" data-easing="true">
+            <div class="xe-icon">
+                <i class="fa-line-chart"></i>
+            </div>
+            <div class="xe-label">
+                <strong class="num" th:text="${dataCount.weiboExtopiaCommentCount}"></strong>
+                <span>自由禁区微博评论总数</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="xe-widget xe-counter xe-counter-info" data-count=".num" data-from="0" th:attr="data-to= ${dataCount.weiboXmqzCommentCount}"
+             data-duration="4" data-easing="true">
+            <div class="xe-icon">
+                <i class="fa-line-chart"></i>
+            </div>
+            <div class="xe-label">
+                <strong class="num" th:text="${dataCount.weiboXmqzCommentCount}"></strong>
+                <span>小米枪战微博评论总数</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="xe-widget xe-counter xe-counter-info" data-count=".num" data-from="0" th:attr="data-to= ${dataCount.weiboMatCommentCount}"
+             data-duration="4" data-easing="true">
+            <div class="xe-icon">
+                <i class="fa-line-chart"></i>
+            </div>
+            <div class="xe-label">
+                <strong class="num" th:text="${dataCount.weiboMatCommentCount}"></strong>
+                <span>反恐行动微博评论总数</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="xe-widget xe-counter xe-counter-info" data-count=".num" data-from="0" th:attr="data-to= ${dataCount.weiboProducerCommentCount}"
+             data-duration="4" data-easing="true">
+            <div class="xe-icon">
+                <i class="fa-line-chart"></i>
+            </div>
+            <div class="xe-label">
+                <strong class="num" th:text="${dataCount.weiboProducerCommentCount}"></strong>
+                <span>制作人微博评论总数</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="xe-widget xe-counter xe-counter-info" data-count=".num" data-from="0"  th:attr="data-to= ${dataCount.bSiteExtopiaCommentCount}"
+             data-duration="4" data-easing="true">
+            <div class="xe-icon">
+                <i class="fa-line-chart"></i>
+            </div>
+            <div class="xe-label">
+                <strong class="num" th:text="${dataCount.bSiteExtopiaCommentCount}"></strong>
+                <span>自由禁区B站评论总数</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="xe-widget xe-counter xe-counter-info" data-count=".num" data-from="0"  th:attr="data-to= ${dataCount.bSiteXmqzCommentCount}"
+             data-duration="4" data-easing="true">
+            <div class="xe-icon">
+                <i class="fa-line-chart"></i>
+            </div>
+            <div class="xe-label">
+                <strong class="num" th:text="${dataCount.bSiteXmqzCommentCount}"></strong>
+                <span>小米枪战B站评论总数</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="xe-widget xe-counter xe-counter-info" data-count=".num" data-from="0" th:attr="data-to= ${dataCount.bSiteMatCommentCount}"
+             data-duration="4" data-easing="true">
+            <div class="xe-icon">
+                <i class="fa-line-chart"></i>
+            </div>
+            <div class="xe-label">
+                <strong class="num" th:text="${dataCount.bSiteMatCommentCount}"></strong>
+                <span>反恐行动B站评论总数</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="xe-widget xe-counter xe-counter-info" data-count=".num" data-from="0" th:attr="data-to= ${dataCount.bBSExtopiaCommentCount}"
+             data-duration="4" data-easing="true">
+            <div class="xe-icon">
+                <i class="fa-line-chart"></i>
+            </div>
+            <div class="xe-label">
+                <strong class="num" th:text="${dataCount.bBSExtopiaCommentCount}"></strong>
+                <span>自由禁区论坛评论总数</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="xe-widget xe-counter xe-counter-info" data-count=".num" data-from="0" th:attr="data-to= ${dataCount.wechatExtopiaCommentCount}"
+             data-duration="4" data-easing="true">
+            <div class="xe-icon">
+                <i class="fa-line-chart"></i>
+            </div>
+            <div class="xe-label">
+                <strong class="num" th:text="${dataCount.wechatExtopiaCommentCount}"></strong>
+                <span>自由禁区微信评论总数</span>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<div class="page-loading-overlay">
+    <div class="loader-2"></div>
+</div>
+</html>

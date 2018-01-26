@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsoft.spider.business.common.spider.weibo.mapper.WeiboMapper">
+
+    <insert id="xmqzAdd">
+        INSERT INTO weibo_xmqz_site_comment(time,text,title,author)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.time},
+            #{item.text},
+            #{item.title},
+            #{item.author}
+            )
+        </foreach>
+    </insert>
+
+
+    <insert id="extopiaAdd">
+        INSERT INTO weibo_extopia_site_comment(time,text,title,author)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.time},
+            #{item.text},
+            #{item.title},
+            #{item.author}
+            )
+        </foreach>
+    </insert>
+
+
+    <insert id="matAdd">
+        INSERT INTO weibo_mat_site_comment(time,text,title,author)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.time},
+            #{item.text},
+            #{item.title},
+            #{item.author}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="producerAdd">
+        INSERT INTO weibo_producer_site_comment(time,text,title,author)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.time},
+            #{item.text},
+            #{item.title},
+            #{item.author}
+            )
+        </foreach>
+    </insert>
+    <insert id="xmqzSingleAdd">
+   INSERT  INTO weibo_xmqz_site_comment(time,text,title,author)
+        VALUES
+            (
+            #{time},
+            #{text},
+            #{title},
+            #{author}
+            )
+    </insert>
+    <insert id="extopiaSingleAdd">
+        INSERT  INTO weibo_extopia_site_comment(time,text,title,author)
+        VALUES
+            (
+            #{time},
+            #{text},
+            #{title},
+            #{author}
+            )
+    </insert>
+    <insert id="matSingleAdd">
+  INSERT  INTO weibo_mat_site_comment(time,text,title,author)
+        VALUES
+            (
+            #{time},
+            #{text},
+            #{title},
+            #{author}
+            )
+    </insert>
+    <insert id="producerSingleAdd">
+  INSERT  INTO weibo_producer_site_comment(time,text,title,author)
+        VALUES
+            (
+            #{time},
+            #{text},
+            #{title},
+            #{author}
+            )
+    </insert>
+
+
+</mapper>

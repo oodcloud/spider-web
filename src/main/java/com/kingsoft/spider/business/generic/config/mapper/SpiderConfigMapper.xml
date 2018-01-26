@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsoft.spider.business.generic.config.mapper.SpiderConfigMapper">
+
+    <insert id="insert">
+        INSERT INTO spider_config
+        (
+        common_url,
+        url_rule,
+        growth_pattern,
+        start_num,
+        end_num,
+        group_name,
+        item_name,
+        site_name,
+        domain,
+        charset,
+        user_agent,
+        cookies,
+        sleep_time,
+        time_out,
+        thread,
+        match_fields,
+        headers,
+        generated_time
+        )VALUES (
+        #{commonUrl},
+        #{urlRule},
+        #{growthPattern},
+        #{startNum},
+        #{endNum},
+        #{groupName},
+        #{itemName},
+        #{siteName},
+        #{domain},
+        #{charset},
+        #{userAgent},
+        #{cookies},
+        #{sleepTime},
+        #{timeOut},
+        #{thread},
+        #{matchFields},
+        #{headers},
+        #{generatedTime}
+        )
+    </insert>
+</mapper>

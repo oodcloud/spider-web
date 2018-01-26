@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <!--/home/tomcatwebsite/logs/spider-web-->
+    <substitutionProperty name="LOG_HOME" value="D:/" />
+    <property name="log.root.level" value="INFO" />
+    <property name="log.other.level" value="INFO" />
+    <property name="log.base" value="logs" />
+    <property name="log.moduleName" value="spider_web" />
+    <property name="log.max.size" value="100MB" />
+
+    <contextName>spider_web</contextName>
+    <jmxConfigurator />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern><![CDATA[%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%X{lsf.requestNo}|%X{lsf.consumerIp}] %logger{56}.%method\(\):%L - %msg%n]]></pattern>
+        </layout>
+    </appender>
+    <appender name="FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoding>UTF-8</encoding>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/Spider-Web-info-%d{yyyy-MM-dd}-%i.log
+            </FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>1024MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} |%-5level |NTY|NA|%thread|
+                %logger{50} -
+                %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR-FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoding>UTF-8</encoding>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/Spider-Web-error-%d{yyyy-MM-dd}-%i.log
+            </FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>1024MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} |%-5level |NTY|NA|%thread|
+                %logger{50} -
+                %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 配置monitor日志，主要用于公司发送告警邮件，设置logger即可，
+    调用：Logger logger = LoggerFactory.getLogger("MONITOR");
+        就能把日志打印到monitor文件中。
+     -->
+    <!--<appender name="MONITOR-FILE"-->
+              <!--class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<encoding>UTF-8</encoding>-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+            <!--&lt;!&ndash;日志文件输出的文件名 &ndash;&gt;-->
+            <!--<FileNamePattern>${LOG_HOME}/Spider-Web-%d{yyyy-MM-dd}-%i.log-->
+            <!--</FileNamePattern>-->
+            <!--&lt;!&ndash;日志文件保留天数 &ndash;&gt;-->
+            <!--<MaxHistory>30</MaxHistory>-->
+            <!--<TimeBasedFileNamingAndTriggeringPolicy-->
+                    <!--class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
+                <!--<MaxFileSize>1024MB</MaxFileSize>-->
+            <!--</TimeBasedFileNamingAndTriggeringPolicy>-->
+        <!--</rollingPolicy>-->
+        <!--<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+            <!--&lt;!&ndash;格式化输出：%d表示日期，%thread表示线程名，%-5level：-->
+            <!--级别从左显示5个字符宽度%msg：日志消息，%n是换行符 &ndash;&gt;-->
+            <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} |%-5level |NTY|NA|%thread|-->
+                <!--%logger{50}|NA|-->
+                <!--%msg%n</pattern>-->
+        <!--</encoder>-->
+        <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+            <!--<level>INFO</level>-->
+            <!--<onMatch>ACCEPT</onMatch>-->
+            <!--<onMismatch>DENY</onMismatch>-->
+        <!--</filter>-->
+    <!--</appender>-->
+
+    <!-- 配置monitor日志输出 -->
+    <!--<logger name="MONITOR">-->
+        <!--<appender-ref ref="MONITOR-FILE" />-->
+    <!--</logger>-->
+
+    <root level="${log.root.level}">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="ERROR-FILE" />
+    </root>
+</configuration>

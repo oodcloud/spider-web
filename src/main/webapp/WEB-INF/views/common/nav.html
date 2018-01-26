@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<nav class="navbar horizontal-menu navbar-fixed-top" th:fragment="navbar">
+    <div class="navbar-inner">
+        <div class="navbar-brand">
+            <a href="/generic/index.html" th:href="@{/generic/index.html}" class="logo">
+                <img src="/assets/images/logo@2x.gif" th:src="@{/assets/images/logo@2x.gif}" width="80" alt=""
+                     class="hidden-xs"/>
+                <img src="/assets/images/logo@2x.gif" th:src="@{/assets/images/logo@2x.gif}" width="80" alt=""
+                     class="visible-xs"/>
+            </a>
+        </div>
+        <div class="nav navbar-mobile">
+            <div class="mobile-menu-toggle">
+                <a href="#" data-toggle="mobile-menu-horizontal">
+                    <i class="fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div class="navbar-mobile-clear"></div>
+        <ul class="navbar-nav">
+            <th:block th:insert="~{common/menu :: content}">
+            </th:block>
+        </ul>
+        <ul class="nav nav-userinfo navbar-right">
+            <li class="dropdown user-profile">
+                <a href="#" data-toggle="dropdown">
+                    <img src="/assets/images/user-1.png" th:src="@{/assets/images/user-logo.jpg}" alt="user-image"
+                         class="img-circle img-inline userpic-32" width="28"/>
+                    <span>
+                        <th:block th:text=" ${#session.getAttribute('user')}">
+                        </th:block>
+							<i class="fa-angle-down"></i>
+						</span>
+                </a>
+
+                <ul class="dropdown-menu user-profile-menu list-unstyled">
+                    <li>
+                        <a href="/settings/index.html" th:href="@{/settings/index.html}">
+                            <i class="fa-wrench"></i>
+                            系统设置
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#help">
+                            <i class="fa-info"></i>
+                            关于我们
+                        </a>
+                    </li>
+                    <li class="last">
+                        <a href="/logout.html" th:href="@{/logout.html}">
+                            <i class="fa-lock"></i>
+                            注销
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

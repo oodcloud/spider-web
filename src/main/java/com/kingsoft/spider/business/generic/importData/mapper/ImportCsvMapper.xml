@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsoft.spider.business.generic.importData.mapper.ImportCsvMapper">
+
+
+    <select id="selectExcelInBSiteExtopia"
+            resultType="com.kingsoft.spider.business.generic.importData.dto.BExcelEntity">
+        SELECT text,title,time ,type,author FROM  b_site_extopia_comment WHERE TRUE
+        <if test="start != null">
+            AND  time &gt;=#{start}
+        </if>
+        <if test="end != null">
+            AND  time &lt;=#{end}
+        </if>
+
+    </select>
+
+    <select id="selectExcelInBSiteMat"
+            resultType="com.kingsoft.spider.business.generic.importData.dto.BExcelEntity">
+        SELECT text,title,time ,type,author FROM  b_site_mat_comment WHERE TRUE
+        <if test="start != null">
+            AND  time &gt;=#{start}
+        </if>
+        <if test="end != null">
+            AND  time &lt;=#{end}
+        </if>
+
+    </select>
+
+
+    <select id="selectExcelInBSiteXmqz"
+            resultType="com.kingsoft.spider.business.generic.importData.dto.BExcelEntity">
+        SELECT text,title,time ,type,author FROM  b_site_xmqz_comment WHERE TRUE
+        <if test="start != null">
+            AND  time &gt;=#{start}
+        </if>
+        <if test="end != null">
+            AND  time &lt;=#{end}
+        </if>
+    </select>
+
+
+
+
+    <select id="selectExcelInBBSSite"
+            resultType="com.kingsoft.spider.business.generic.importData.dto.ExcelEntity">
+        SELECT text,title,time,author FROM  bbs_site_comment WHERE TRUE
+        <if test="start != null">
+            AND  time &gt;=#{start}
+        </if>
+        <if test="end != null">
+            AND  time &lt;=#{end}
+        </if>
+
+    </select>
+    <select id="selectExcelInTiebaSiteExtopia"
+            resultType="com.kingsoft.spider.business.generic.importData.dto.ExcelEntity">
+        SELECT text,title,time,author FROM  tieba_extopia_site_comment WHERE TRUE
+        <if test="start != null">
+            AND  time &gt;=#{start}
+        </if>
+        <if test="end != null">
+            AND  time &lt;=#{end}
+        </if>
+    </select>
+
+    <select id="selectExcelInTiebaSiteXmqz"
+            resultType="com.kingsoft.spider.business.generic.importData.dto.ExcelEntity">
+        SELECT text,title,time,author FROM  tieba_xmqz_site_comment WHERE TRUE
+        <if test="start != null">
+            AND  time &gt;=#{start}
+        </if>
+        <if test="end != null">
+            AND  time &lt;=#{end}
+        </if>
+    </select>
+
+    <select id="selectExcelInTiebaSiteMat"
+            resultType="com.kingsoft.spider.business.generic.importData.dto.ExcelEntity">
+        SELECT text,title,time,author FROM  tieba_mat_site_comment WHERE TRUE
+        <if test="start != null">
+            AND  time &gt;=#{start}
+        </if>
+        <if test="end != null">
+            AND  time &lt;=#{end}
+        </if>
+    </select>
+
+
+
+
+
+
+    <select id="selectExcelInWeiboSiteExtopia"
+            resultType="com.kingsoft.spider.business.generic.importData.dto.ExcelEntity">
+        SELECT text,title,time,author FROM  weibo_extopia_site_comment WHERE TRUE
+        <if test="start != null">
+            AND  time &gt;=#{start}
+        </if>
+        <if test="end != null">
+            AND  time &lt;=#{end}
+        </if>
+
+    </select>
+
+    <select id="selectExcelInWeiboSiteMat"
+            resultType="com.kingsoft.spider.business.generic.importData.dto.ExcelEntity">
+        SELECT text,title,time,author FROM  weibo_mat_site_comment WHERE TRUE
+        <if test="start != null">
+            AND  time &gt;=#{start}
+        </if>
+        <if test="end != null">
+            AND  time &lt;=#{end}
+        </if>
+
+    </select>
+    <select id="selectExcelInWeiboSiteProducer"
+            resultType="com.kingsoft.spider.business.generic.importData.dto.ExcelEntity">
+        SELECT text,title,time,author FROM  weibo_producer_site_comment WHERE TRUE
+        <if test="start != null">
+            AND  time &gt;=#{start}
+        </if>
+        <if test="end != null">
+            AND  time &lt;=#{end}
+        </if>
+
+    </select>
+    <select id="selectExcelInWeiboSiteXmqz"
+            resultType="com.kingsoft.spider.business.generic.importData.dto.ExcelEntity">
+        SELECT text,title,time,author FROM  weibo_xmqz_site_comment WHERE TRUE
+        <if test="start != null">
+            AND  time &gt;=#{start}
+        </if>
+        <if test="end != null">
+            AND  time &lt;=#{end}
+        </if>
+
+    </select>
+    <select id="selectExcelInWechatExtopia"
+            resultType="com.kingsoft.spider.business.generic.importData.dto.ExcelEntity">
+        SELECT text,title,time,author FROM  wechat_extopia_comment WHERE TRUE
+        <if test="start != null">
+            AND  time &gt;=#{start}
+        </if>
+        <if test="end != null">
+            AND  time &lt;=#{end}
+        </if>
+    </select>
+    <select id="selectExcelInWechatXmqz"
+            resultType="com.kingsoft.spider.business.generic.importData.dto.ExcelEntity">
+        SELECT text,title,time,author FROM  wechat_xmqz_comment WHERE TRUE
+        <if test="start != null">
+            AND  time &gt;=#{start}
+        </if>
+        <if test="end != null">
+            AND  time &lt;=#{end}
+        </if>
+    </select>
+    <select id="selectExcelInWechatMat"
+            resultType="com.kingsoft.spider.business.generic.importData.dto.ExcelEntity">
+        SELECT text,title,time,author FROM  wechat_mat_comment WHERE TRUE
+        <if test="start != null">
+            AND  time &gt;=#{start}
+        </if>
+        <if test="end != null">
+            AND  time &lt;=#{end}
+        </if>
+    </select>
+
+</mapper>

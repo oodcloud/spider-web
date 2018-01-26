@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::div})">
+<div>
+    <script src="/assets/js/jquery-validate/jquery.validate.min.js"
+            th:src="@{/assets/js/jquery-validate/jquery.validate.min.js}"></script>
+    <script src="/assets/js/formwizard/jquery.bootstrap.wizard.min.js"
+            th:src="@{/assets/js/formwizard/jquery.bootstrap.wizard.min.js}"></script>
+    <script src="/assets/js/multiselect/js/jquery.multi-select.js"
+            th:src="@{/assets/js/multiselect/js/jquery.multi-select.js}"></script>
+    <script src="/assets/generic/config/index.js" th:src="@{/assets/generic/config/index.js}"></script>
+
+    <form role="forl" id="configurationForm" class="form-wizard validate" novalidate="novalidate">
+
+        <ul class="tabs">
+            <li class="active ms-hover">
+                <a href="#fwv-1" data-toggle="tab">
+                    源URL目标配置
+                    <span>step 1</span>
+                </a>
+            </li>
+            <li class="ms-hover">
+                <a href="#fwv-2" data-toggle="tab">
+                    分组
+                    <span>step 2</span>
+                </a>
+            </li>
+            <li class="ms-hover">
+                <a href="#fwv-3" data-toggle="tab">
+                    核心配置
+                    <span>step 3</span>
+                </a>
+            </li>
+            <li class="ms-hover">
+                <a href="#fwv-4" data-toggle="tab">
+                    规则添加
+                    <span>step 4</span>
+                </a>
+            </li>
+            <li class="ms-hover">
+                <a href="#fwv-5" data-toggle="tab">
+                    测试
+                    <span>step 5</span>
+                </a>
+            </li>
+            <li class="ms-hover">
+                <a href="#fwv-6" data-toggle="tab">
+                    保存配置
+                    <span>step 6</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="progress-indicator" style="width: 0%;">
+            <span></span>
+        </div>
+
+        <div class="tab-content no-margin">
+
+            <!-- Tabs Content -->
+            <div class="tab-pane with-bg active" id="fwv-1">
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group validate-has-error">
+                            <label class="control-label" for="commonUrl">公共Url</label>
+                            <input class="form-control" name="commonUrl" id="commonUrl" data-validate="required"
+                                   placeholder="相似部分的url" aria-required="true"
+                                   aria-describedby="full_name-error" aria-invalid="true">
+                            <span id="full_name-error" class="validate-has-error">
+                                [http://www.oddcloud.cn/43-2/page/2,http://www.oddcloud.cn/43-2/page/3]URL公共部分为：http://www.oddcloud.cn/43-2/page/*.
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label class="control-label" for="urlRule">URL的规则</label>
+                            <select class="form-control" id="urlRule" name="urlRule">
+                                <option value="2">单调递增</option>
+                                <option value="3">单调递减</option>
+                                <option value="1">等比</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group validate-has-error">
+                            <label class="control-label" for="growthPattern">URL的增长方式</label>
+                            <input class="form-control" name="growthPattern" id="growthPattern" data-validate="required"
+                                   placeholder="请填入数字" aria-required="true"
+                                   aria-describedby="growthPattern-error">
+                            <span id="growthPattern-error" class="validate-has-error">
+                                [http://www.oddcloud.cn/43-2/page/2,http://www.oddcloud.cn/43-2/page/3]URL的增长方式：1.
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group validate-has-error">
+                            <label class="control-label" for="startNum">开始页</label>
+                            <input class="form-control" name="startNum" id="startNum" data-validate="required"
+                                   placeholder="请填入数字" aria-required="true"
+                                   aria-describedby="startNum-error">
+                            <span id="startNum-error" class="validate-has-error">
+                               例如 URL的开始页：1.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group validate-has-error">
+                            <label class="control-label" for="endNum">结束页</label>
+                            <input class="form-control" name="endNum" id="endNum" data-validate="required"
+                                   placeholder="请填入数字" aria-required="true"
+                                   aria-describedby="endNum-error">
+                            <span id="endNum-error" class="validate-has-error">
+                               例如 URL的结束页：100.
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <br>
+                    <button type="button" class="btn btn-orange common-url-test">测试url</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane with-bg" id="fwv-2">
+
+                <div class="row">
+
+                    <div class="col-md-9">
+                        <div class="form-group validate-has-error">
+                            <label class="control-label" for="groupName">组名</label>
+                            <input class="form-control" name="groupName" id="groupName" data-validate="required"
+                                   placeholder="请输入组名">
+                        </div>
+                    </div>
+
+                    <div class="col-md-9">
+                        <div class="form-group validate-has-error">
+                            <label class="control-label" for="itemName">数据项</label>
+                            <input class="form-control" name="itemName" id="itemName" data-validate="required"
+                                   placeholder="请输入数据项">
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="tab-pane with-bg" id="fwv-3">
+
+                <strong>常规配置</strong>
+                <br>
+                <br>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group validate-has-error">
+                            <label class="control-label" for="siteName">站点名称</label>
+                            <input class="form-control" name="siteName" id="siteName"
+                                   data-validate="required" placeholder="请输入站点名称">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group validate-has-error">
+                            <label class="control-label" for="domain">域名</label>
+                            <input class="form-control" name="domain" id="domain" data-validate="required"
+                                   placeholder="请输入域名">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group ">
+                            <label class="control-label" for="charset">该网站编码(可选)</label>
+                            <input class="form-control" name="charset" id="charset"
+                                   placeholder="请输入该网站编码(默认utf-8)">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group ">
+                            <label class="control-label" for="userAgent">userAgent(可选)</label>
+                            <input class="form-control" name="userAgent" id="userAgent"
+                                   placeholder="请输入userAgent">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group ">
+                            <label class="control-label" for="cookies">cookies(可选)</label>
+                            <input class="form-control" name="cookies" id="cookies"
+                                   placeholder="请输入cookies">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group ">
+                            <label class="control-label" for="headers">headers(可选多个以|分隔)例如Accept:*/*|Accept-Encoding:gzip, deflate, br</label>
+                            <input class="form-control" name="headers" id="headers"
+                                   placeholder="请输入该网站headers">
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+
+                <strong>爬取配置</strong>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group validate-has-error">
+                            <label class="control-label" for="sleepTime">睡眠时间</label>
+                            <input class="form-control" name="sleepTime" id="sleepTime"
+                                   data-validate="required" placeholder="爬取页面等待时间(时间不能设置太多，容易被封)">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group validate-has-error">
+                            <label class="control-label" for="retryTimes">重试次数</label>
+                            <input class="form-control" name="retryTimes" id="retryTimes"
+                                   data-validate="required" placeholder="抓取失败，重试次数">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group validate-has-error">
+                            <label class="control-label" for="timeOut">超时时间</label>
+                            <input class="form-control" name="timeOut" id="timeOut"
+                                   data-validate="required" placeholder="连接目标时间的超时时间">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group validate-has-error">
+                            <label class="control-label" for="thread">线程数</label>
+                            <input class="form-control" name="thread" id="thread"
+                                   data-validate="required" placeholder="为该任务开启的线程(默认2)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane with-bg" id="fwv-4">
+
+                <strong>动态添加字段:</strong>
+                <button type="button" class="btn btn-icon  btn-xs  addDynamicField">
+                    <i class="fa-plus-square"></i>
+                </button>
+                <strong>清空字段:</strong>
+                <button type="button" class="btn btn-icon  btn-xs  delDynamicField ">
+                    <i class="fa-times"></i>
+                </button>
+                <br>
+                <br>
+                <div id="dynamicFields">
+                    <div class="row ">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="fieldName">字段中文名称</label>
+                                <input  class="form-control" name="fieldName0" id="fieldName"
+                                       data-validate="required" placeholder="请输入字段中文名称">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="fieldEnglishName">字段英文名称</label>
+                                <input  class="form-control" name="fieldEnglishName0" id="fieldEnglishName"
+                                        data-validate="required" placeholder="请输入字段英文名称(这个是数据库的字段名称请正确书写)">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="regex">正则表达式</label>
+                                <input class="form-control" name="regex0" data-validate="require" id="regex"
+                                       placeholder="匹配该字段的正则表达式">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="xpath">xpath</label>
+                                <input class="form-control" name="xpath0" data-validate="require" id="xpath"
+                                       placeholder="匹配该字段的Xpath">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tab-pane with-bg" id="fwv-5">
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary executeTest">执行测试</button>
+                </div>
+            </div>
+            <div class="tab-pane with-bg" id="fwv-6">
+                <button type="button" class="btn btn-primary saveConfiguration">保存配置</button>
+            </div>
+            <!-- Tabs Pager -->
+
+            <ul class="pager wizard">
+                <li class="previous disabled">
+                    <a href="#"><i class="entypo-left-open"></i> 上一步</a>
+                </li>
+
+                <li class="next">
+                    <a href="#">下一步 <i class="entypo-right-open"></i></a>
+                </li>
+            </ul>
+
+        </div>
+    </form>
+
+
+
+
+</div>
+</html>

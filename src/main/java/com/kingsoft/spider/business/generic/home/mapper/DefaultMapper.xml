@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kingsoft.spider.business.generic.home.mapper.DefaultMapper">
+
+    <select id="getBSiteExtopiaCommentCount" resultType="java.lang.Long">
+      SELECT count(id) FROM b_site_extopia_comment
+    </select>
+    <select id="getBSiteXmqzCommentCount" resultType="java.lang.Long">
+      SELECT count(id) FROM b_site_xmqz_comment
+    </select>
+    <select id="getBSiteMatCommentCount" resultType="java.lang.Long">
+      SELECT count(id) FROM b_site_mat_comment
+    </select>
+    <select id="getTiebaExtopiaCommentCount" resultType="java.lang.Long">
+      SELECT count(id) FROM tieba_extopia_site_comment
+    </select>
+    <select id="getTiebaXmqzCommentCount" resultType="java.lang.Long">
+      SELECT count(id) FROM tieba_xmqz_site_comment
+    </select>
+    <select id="getTiebaMatCommentCount" resultType="java.lang.Long">
+      SELECT count(id) FROM tieba_mat_site_comment
+    </select>
+    <select id="getWeiboExtopiaCommentCount" resultType="java.lang.Long">
+      SELECT count(id) FROM weibo_extopia_site_comment
+    </select>
+    <select id="getWeiboXmqzCommentCount" resultType="java.lang.Long">
+      SELECT count(id) FROM weibo_xmqz_site_comment
+    </select>
+    <select id="getWeiboMatCommentCount" resultType="java.lang.Long">
+      SELECT count(id) FROM weibo_mat_site_comment
+    </select>
+    <select id="getWeiboProducerCommentCount" resultType="java.lang.Long">
+      SELECT count(id) FROM weibo_producer_site_comment
+    </select>
+    <select id="getBBSExtopiaCommentCount" resultType="java.lang.Long">
+      SELECT count(id) FROM bbs_site_comment
+    </select>
+    <select id="getWechatExtopiaCommentCount" resultType="java.lang.Long">
+      SELECT count(id) FROM wechat_extopia_comment
+    </select>
+    <select id="getWechatXmqzCommentCount" resultType="java.lang.Long">
+      SELECT count(id) FROM wechat_xmqz_comment
+    </select>
+    <select id="getWechatMatCommentCount" resultType="java.lang.Long">
+      SELECT count(id) FROM wechat_mat_comment
+    </select>
+</mapper>
