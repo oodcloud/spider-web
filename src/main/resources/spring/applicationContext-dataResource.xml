@@ -24,6 +24,7 @@
                 <property name="removeAbandoned" value="true"/>
                 <property name="removeAbandonedTimeout" value="1800"/>
                 <property name="logAbandoned" value="true"/>
+                <property name="filters" value="stat" />
         </bean>
 
 

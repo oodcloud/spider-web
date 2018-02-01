@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" th:fragment="common(div)">
+      xmlns:th="http://www.thymeleaf.org" th:fragment="common(MainContent,script,PageContainerBelow)">
 <head th:replace="~{common/header :: head}"></head>
 <body class="page-body">
 <nav th:replace=" ~{common/nav :: navbar}"></nav>
 <div class="page-container">
     <div th:replace="~{common/sidebar :: sidebar-menu}"></div>
     <div class="main-content">
-        <th:block th:replace="${div}" />
+        <th:block th:replace="${MainContent}" />
         <div th:replace="~{common/footer :: copy}"></div>
     </div>
 </div>
+<th:block th:replace="${PageContainerBelow}" />
 <script src="/assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
 <script src="/assets/js/TweenMax.min.js" th:src="@{/assets/js/TweenMax.min.js}"></script>
 <script src="/assets/js/resizeable.js" th:src="@{/assets/js/resizeable.js}"></script>
@@ -18,6 +19,7 @@
 <script src="/assets/js/xenon-api.js" th:src="@{/assets/js/xenon-api.js}"></script>
 <script src="/assets/js/xenon-toggles.js" th:src="@{/assets/js/xenon-toggles.js}"></script>
 <script src="/assets/js/xenon-custom.js" th:src="@{/assets/js/xenon-custom.js}"></script>
+<th:block th:replace="${script}" />
 
 </body>
 </html>

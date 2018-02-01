@@ -3,6 +3,7 @@ package com.kingsoft.spider.business.common.spider.bSite.pipeline;
 import com.alibaba.fastjson.JSON;
 import com.kingsoft.spider.business.common.spider.bSite.dto.CommentDto;
 import com.kingsoft.spider.business.common.spider.bSite.mapper.bMapper;
+import com.kingsoft.spider.business.common.spiderLastTime.service.SpiderLastTimeService;
 import com.kingsoft.spider.core.common.support.PropertiesUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,13 +26,15 @@ public class BMatPipeline implements Pipeline {
     private bMapper bMapper;
     private Logger logger = LoggerFactory.getLogger(BMatPipeline.class);
     private final HandleData handleData = new HandleData();
+    @Autowired
+    private SpiderLastTimeService spiderLastTimeService;
     @Override
     public void process(ResultItems resultItems, Task task) {
         String commentVo = resultItems.get("comment");
         String discussVo = resultItems.get("discuss");
         String title = resultItems.get("title");
         if (commentVo != null) {
-            String time = PropertiesUtils.readData("spiderLastTime.properties", "matB");
+            Long time = spiderLastTimeService.selectLastTime("matB");
             List<CommentDto> commentVoDtos = JSON.parseArray(commentVo, CommentDto.class);
             List<CommentDto> discussVoDtos = JSON.parseArray(discussVo, CommentDto.class);
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kingsoft.spider.business.common.spiderLastTime.mapper.SpiderLastTimeMapper">
+    <update id="selectLastTime">
+        SELECT last_time FROM spider_last_time WHERE spider_name=#{name}
+    </update>
+
+    <select id="updateLastTime">
+      UPDATE spider_last_time SET last_time= #{time},update_time=#{date} WHERE spider_name=#{name}
+    </select>
+</mapper>

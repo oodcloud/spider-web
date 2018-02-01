@@ -2,7 +2,6 @@ package com.kingsoft.spider.business.common.spider.weibo;
 
 import com.kingsoft.spider.business.common.spider.weibo.dao.WeiboDto;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,7 +10,7 @@ public class HandleData {
     public HandleData() {
     }
 
-    void checkIsWriteDB(String time, List<WeiboDto> weiboDtos) {
+    void checkIsWriteDB(Long time, List<WeiboDto> weiboDtos) {
         Iterator<WeiboDto> weiboDtoIterator = weiboDtos.iterator();
         while (weiboDtoIterator.hasNext()) {
             WeiboDto dto = weiboDtoIterator.next();

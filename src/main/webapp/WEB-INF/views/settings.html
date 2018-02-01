@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::div})">
+      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::MainContent},~{},~{ })">
 
-<div>
+<MainContent>
     <div class="col-md-9"></div>
     <div class="col-md-3">
         <div class="btn-group">
@@ -36,5 +36,5 @@
         </div>
 
     </div>
-</div>
+</MainContent>
 </html>

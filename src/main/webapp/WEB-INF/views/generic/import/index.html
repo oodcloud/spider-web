@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::div})">
-<div>
-    <!--引用文件放在头-->
-    <link rel="stylesheet" href="/assets/js/daterangepicker/daterangepicker-bs3.css"
-          th:href="@{/assets/js/daterangepicker/daterangepicker-bs3.css}">
-    <script src="/assets/js/datepicker/bootstrap-datepicker.js"
-            th:src="@{/assets/js/datepicker/bootstrap-datepicker.js}"></script>
+      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::MainContent},~{::script},~{ })">
+<!--引用文件放在头-->
+<link rel="stylesheet" href="/assets/js/daterangepicker/daterangepicker-bs3.css"
+      th:href="@{/assets/js/daterangepicker/daterangepicker-bs3.css}">
+<script src="/assets/js/datepicker/bootstrap-datepicker.js"
+        th:src="@{/assets/js/datepicker/bootstrap-datepicker.js}"></script>
+<MainContent>
+
 
     <ol class="breadcrumb  bc-3">
         <li>
@@ -73,6 +74,5 @@
             <small>导出表中的时间范围是根据评论时间作为检索条件</small>
         </p>
     </blockquote>
-</div>
-</div>
+</MainContent>
 </html>

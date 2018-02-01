@@ -3,6 +3,7 @@ package com.kingsoft.spider.business.common.spider.tieba.pipeline;
 import com.alibaba.fastjson.JSON;
 import com.kingsoft.spider.business.common.spider.tieba.dto.tiebaDto;
 import com.kingsoft.spider.business.common.spider.tieba.mapper.TiebaMapper;
+import com.kingsoft.spider.business.common.spiderLastTime.service.SpiderLastTimeService;
 import com.kingsoft.spider.core.common.support.PropertiesUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,8 @@ public class TiebaMatPipeline implements Pipeline {
     @Autowired
     private TiebaMapper tiebaMapper;
     private Logger logger= LoggerFactory.getLogger(TiebaMatPipeline.class);
+    @Autowired
+    private SpiderLastTimeService spiderLastTimeService;
     @Override
     public void process(ResultItems resultItems, Task task) {
         String title = resultItems.get("title");
@@ -36,7 +39,7 @@ public class TiebaMatPipeline implements Pipeline {
             logger.info("TiebaMatPipeline download one page Extract allContent:" + allContent.size() + "allRepeatTime:" + allRepeatTime.size());
         }
         if (allContent != null && !allContent.isEmpty()) {
-            String time = PropertiesUtils.readData("spiderLastTime.properties", "matTieba");
+            Long time = spiderLastTimeService.selectLastTime("matTieba");
             List<tiebaDto> dtos = new ArrayList<>();
             handleData.execute(title, allContent, allRepeatTime, allAuthor, time, dtos);
             save(dtos);

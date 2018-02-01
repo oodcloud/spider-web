@@ -3,6 +3,7 @@ package com.kingsoft.spider.business.common.spider.weibo;
 import com.alibaba.fastjson.JSON;
 import com.kingsoft.spider.business.common.spider.weibo.dao.WeiboDto;
 import com.kingsoft.spider.business.common.spider.weibo.mapper.WeiboMapper;
+import com.kingsoft.spider.business.common.spiderLastTime.service.SpiderLastTimeService;
 import com.kingsoft.spider.core.common.support.PropertiesUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +25,10 @@ public class WeiboXmqzProcessor extends AbstractWeiboProcessor {
     private WeiboMapper weiboMapper;
     private Logger logger = LoggerFactory.getLogger(WeiboXmqzProcessor.class);
     private final HandleData handleData = new HandleData();
-
+    @Autowired
+    private SpiderLastTimeService spiderLastTimeService;
     public void save(Future<List<WeiboDto>> listFuture) {
-        String time = PropertiesUtils.readData("spiderLastTime.properties", "xmqzWeibo");
+        Long time = spiderLastTimeService.selectLastTime("xmqzWeibo");
         try {
             List<WeiboDto> weiboDtos = listFuture.get();
             if (listFuture.isDone()) {

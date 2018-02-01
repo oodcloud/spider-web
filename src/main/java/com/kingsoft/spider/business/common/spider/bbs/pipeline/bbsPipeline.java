@@ -3,6 +3,7 @@ package com.kingsoft.spider.business.common.spider.bbs.pipeline;
 import com.alibaba.fastjson.JSON;
 import com.kingsoft.spider.business.common.spider.bbs.dto.bbsDto;
 import com.kingsoft.spider.business.common.spider.bbs.mapper.BbsMapper;
+import com.kingsoft.spider.business.common.spiderLastTime.service.SpiderLastTimeService;
 import com.kingsoft.spider.core.common.support.PropertiesUtils;
 import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import com.vdurmont.emoji.EmojiParser;
@@ -30,6 +31,9 @@ public class bbsPipeline implements Pipeline {
     @Resource
     private BbsMapper bbsMapper;
 
+    @Autowired
+    private SpiderLastTimeService spiderLastTimeService;
+
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     private Logger logger= LoggerFactory.getLogger(bbsPipeline.class);
@@ -42,7 +46,7 @@ public class bbsPipeline implements Pipeline {
         List<String> authors = resultItems.get("author");
         if (content != null && !content.isEmpty()) {
             List<bbsDto> bbsDtos = new ArrayList<>();
-            String time = PropertiesUtils.readData("spiderLastTime.properties", "extopiaBBS");
+            Long time = spiderLastTimeService.selectLastTime("extopiaBBS");
             for (int i = 0; i < content.size(); i++) {
                 if (!"".equals(content.get(i))) {
                     bbsDto dto = new bbsDto();
@@ -84,12 +88,11 @@ public class bbsPipeline implements Pipeline {
         }
     }
 
-    private void checkIsWriteDB(List<bbsDto> bbsDtos, String time, bbsDto dto) {
+    private void checkIsWriteDB(List<bbsDto> bbsDtos, Long time, bbsDto dto) {
         if (time == null||"".equals(time))  {
             bbsDtos.add(dto);
         } else {
-            Long date = Long.valueOf(time);
-            if (date <dto.getTime())
+            if (time <dto.getTime())
             {
                 bbsDtos.add(dto);
             }

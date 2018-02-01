@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::div})">
-<div>
-
-    <link rel="stylesheet" href="/assets/css/fonts/meteocons/css/meteocons.css"
-          th:href="@{/assets/css/fonts/meteocons/css/meteocons.css}">
-    <script src="/assets/js/xenon-widgets.js" th:src="@{/assets/js/xenon-widgets.js}"></script>
-
+      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::MainContent},~{::script},~{})">
+<link rel="stylesheet" href="/assets/css/fonts/meteocons/css/meteocons.css"
+      th:href="@{/assets/css/fonts/meteocons/css/meteocons.css}">
+<script src="/assets/js/xenon-widgets.js" th:src="@{/assets/js/xenon-widgets.js}"></script>
+<MainContent>
     <div class="col-sm-3">
         <div class="xe-widget xe-counter xe-counter-info" data-count=".num"
              data-duration="4" data-easing="true"  data-from="0"  th:attr="data-to= ${dataCount.tiebaExtopiaCommentCount}">
@@ -153,10 +151,10 @@
         </div>
     </div>
 
+    <div class="page-loading-overlay">
+        <div class="loader-2"></div>
+    </div>
 
+</MainContent>
 
-</div>
-<div class="page-loading-overlay">
-    <div class="loader-2"></div>
-</div>
 </html>

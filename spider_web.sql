@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2018-01-26 13:19:20
+Date: 2018-02-01 16:37:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,7 +28,7 @@ CREATE TABLE `b_site_extopia_comment` (
   `author` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `b_site_extopia_time` (`time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=140393 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=257651 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for b_site_mat_comment
@@ -43,7 +43,7 @@ CREATE TABLE `b_site_mat_comment` (
   `author` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `b_site_mat_time` (`time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=17075 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24345 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for b_site_xmqz_comment
@@ -58,7 +58,7 @@ CREATE TABLE `b_site_xmqz_comment` (
   `author` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `b_site_xmqz_time` (`time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=309964 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=430386 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for bbs_site_comment
@@ -72,7 +72,7 @@ CREATE TABLE `bbs_site_comment` (
   `author` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `bbs_site_comment_time` (`time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=152350 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=233081 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for spider_config
@@ -100,6 +100,18 @@ CREATE TABLE `spider_config` (
   `generated_time` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='爬虫信息配置表';
+
+-- ----------------------------
+-- Table structure for spider_last_time
+-- ----------------------------
+DROP TABLE IF EXISTS `spider_last_time`;
+CREATE TABLE `spider_last_time` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `spider_name` varchar(255) DEFAULT NULL,
+  `last_time` bigint(20) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for tieba_extopia_site_comment
@@ -210,7 +222,7 @@ CREATE TABLE `weibo_extopia_site_comment` (
   `author` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `weibo_extopia_time` (`time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7559 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20103 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for weibo_mat_site_comment
@@ -224,7 +236,7 @@ CREATE TABLE `weibo_mat_site_comment` (
   `author` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `weibo_mat_time` (`time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=49256 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=77583 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for weibo_producer_site_comment
@@ -238,7 +250,7 @@ CREATE TABLE `weibo_producer_site_comment` (
   `author` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `weibo_producer_time` (`time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=80145 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=103404 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for weibo_xmqz_site_comment
@@ -252,4 +264,4 @@ CREATE TABLE `weibo_xmqz_site_comment` (
   `author` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `weibo_xmqz_time` (`time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=103050 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=173596 DEFAULT CHARSET=utf8;

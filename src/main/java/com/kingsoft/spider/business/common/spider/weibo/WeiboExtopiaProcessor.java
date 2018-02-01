@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.kingsoft.spider.business.common.spider.bSite.dto.CommentDto;
 import com.kingsoft.spider.business.common.spider.weibo.dao.WeiboDto;
 import com.kingsoft.spider.business.common.spider.weibo.mapper.WeiboMapper;
+import com.kingsoft.spider.business.common.spiderLastTime.service.SpiderLastTimeService;
 import com.kingsoft.spider.core.common.support.PropertiesUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,9 +25,10 @@ public class WeiboExtopiaProcessor extends AbstractWeiboProcessor {
     @Autowired
     private WeiboMapper weiboMapper;
     private Logger logger = LoggerFactory.getLogger(WeiboExtopiaProcessor.class);
-
+    @Autowired
+    private SpiderLastTimeService spiderLastTimeService;
     public void save(Future<List<WeiboDto>> listFuture) {
-        String time = PropertiesUtils.readData("spiderLastTime.properties", "extopiaWeibo");
+        Long time = spiderLastTimeService.selectLastTime("extopiaWeibo");
         try {
             List<WeiboDto> weiboDtos = listFuture.get();
             if (listFuture.isDone()) {

@@ -6,12 +6,10 @@ import com.vdurmont.emoji.EmojiParser;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class HandleData {
 
-    void execute(String title, List<String> allContent, List<String> allRepeatTime, List<String> allAuthor, String time, List<tiebaDto> dtos) {
+    void execute(String title, List<String> allContent, List<String> allRepeatTime, List<String> allAuthor, Long time, List<tiebaDto> dtos) {
 //        Pattern emojPattern = Pattern.compile("([D83cDc00-D83cDfff]|[D83dDc00-D83dDfff]|[2600-27ff]){0,}", Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         for (int i = 0; i < allContent.size(); i++) {
@@ -35,12 +33,11 @@ public class HandleData {
             }
         }
     }
-    private void checkIsWriteDB(String time, List<tiebaDto> dtos, tiebaDto dto) {
+    private void checkIsWriteDB(Long time, List<tiebaDto> dtos, tiebaDto dto) {
         if (time == null||"".equals(time)) {
             dtos.add(dto);
         } else {
-            Long date = Long.valueOf(time);
-            if (date <dto.getTime())
+            if (time <dto.getTime())
             {
                 dtos.add(dto);
             }
