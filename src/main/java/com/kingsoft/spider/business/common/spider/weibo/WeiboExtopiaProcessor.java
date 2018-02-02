@@ -28,7 +28,7 @@ public class WeiboExtopiaProcessor extends AbstractWeiboProcessor {
     @Autowired
     private SpiderLastTimeService spiderLastTimeService;
     public void save(Future<List<WeiboDto>> listFuture) {
-        Long time = spiderLastTimeService.selectLastTime("extopiaWeibo");
+
         try {
             List<WeiboDto> weiboDtos = listFuture.get();
             if (listFuture.isDone()) {
@@ -37,6 +37,7 @@ public class WeiboExtopiaProcessor extends AbstractWeiboProcessor {
                 if (weiboDtos != null && weiboDtos.size() != 0) {
                     List<WeiboDto> weiboDtoList=new CopyOnWriteArrayList<>(weiboDtos);
                     //判断是否入库
+                    Long time = spiderLastTimeService.selectLastTime("extopiaWeibo");
                     handleData.checkIsWriteDB(time, weiboDtoList);
                     try {
                         weiboMapper.extopiaAdd(weiboDtoList);

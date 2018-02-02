@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::MainContent},~{::script},~{ })">
+
+<script src="/assets/js/datatables/js/jquery.dataTables.min.js"
+        th:src="@{/assets/js/datatables/js/jquery.dataTables.min.js}"></script>
+<script src="/assets/js/datatables/dataTables.bootstrap.js"
+        th:src="@{/assets/js/datatables/dataTables.bootstrap.js}"></script>
+<script src="/assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"
+        th:src="@{/assets/js/datatables/yadcf/jquery.dataTables.yadcf.js}"></script>
+<script src="/assets/js/datatables/tabletools/dataTables.tableTools.min.js"
+        th:src="@{/assets/js/datatables/tabletools/dataTables.tableTools.min.js}"></script>
+
 <MainContent>
     <link rel="stylesheet" href="/assets/js/datatables/dataTables.bootstrap.css"
           th:href="@{/assets/js/datatables/dataTables.bootstrap.css}">
-
-
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">爬虫配置列表</h3>
@@ -40,19 +48,21 @@
                     <thead>
                     <tr role="row">
                         <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
-                            aria-label="Student Name: activate to sort column ascending" style="width: 205px;">Student
-                            Name
+                            aria-label="任务名" style="width: 205px;">
+                            任务名称
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
-                            aria-label="Average Grade: activate to sort column ascending" style="width: 116px;">Average
-                            Grade
+                            aria-label="组名" style="width: 116px;">
+                            组名
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
-                            aria-label="Curriculum / Occupation: activate to sort column ascending"
-                            style="width: 248px;">Curriculum / Occupation
+                            aria-label="修改时间"
+                            style="width: 248px;">
+                            修改时间
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
-                            aria-label="Actions: activate to sort column ascending" style="width: 199px;">Actions
+                            aria-label="行为" style="width: 199px;">
+                            行为
                         </th>
                     </tr>
                     </thead>
@@ -60,261 +70,142 @@
                     <tbody class="middle-align">
 
                     <tr role="row" class="odd">
-                        <td>Randy S. Smith</td>
-                        <td>8.7</td>
-                        <td>Social and human service</td>
+                        <td>贴吧 </td>
+                        <td>小米枪战</td>
+                        <td>2018-2-18</td>
                         <td>
                             <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                Edit
+                                修改任务
                             </a>
 
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                Delete
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                Profile
+                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
+                                删除任务
                             </a>
                         </td>
                     </tr>
                     <tr role="row" class="even">
-
-                        <td>Ellen C. Jones</td>
-                        <td>7.2</td>
-                        <td>Education and development manager</td>
+                        <td>贴吧 </td>
+                        <td>小米枪战</td>
+                        <td>2018-2-18</td>
                         <td>
                             <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                Edit
+                                修改任务
                             </a>
 
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                Delete
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                Profile
+                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
+                                删除任务
                             </a>
                         </td>
                     </tr>
                     <tr role="row" class="odd">
-
-                        <td>Carl D. Kaya</td>
-                        <td>9.5</td>
-                        <td>Express Merchant Service</td>
+                        <td>贴吧 </td>
+                        <td>小米枪战</td>
+                        <td>2018-2-18</td>
                         <td>
                             <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                Edit
+                                修改任务
                             </a>
 
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                Delete
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                Profile
+                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
+                                删除任务
                             </a>
                         </td>
                     </tr>
                     <tr role="row" class="even">
-
-                        <td>Jennifer J. Jefferson</td>
-                        <td>10</td>
-                        <td>Maxillofacial surgeon</td>
+                        <td>贴吧 </td>
+                        <td>小米枪战</td>
+                        <td>2018-2-18</td>
                         <td>
                             <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                Edit
+                                修改任务
                             </a>
 
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                Delete
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                Profile
+                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
+                                删除任务
                             </a>
                         </td>
                     </tr>
                     <tr role="row" class="odd">
-
-                        <td>April L. Baker <span class="label label-success">New Applicant</span></td>
-                        <td>6.8</td>
-                        <td>Set and exhibit designer</td>
+                        <td>贴吧</td>
+                        <td>小米枪战</td>
+                        <td>2018-2-18</td>
                         <td>
                             <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                Edit
+                                修改任务
                             </a>
 
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                Delete
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                Profile
+                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
+                                删除任务
                             </a>
                         </td>
                     </tr>
                     <tr role="row" class="even">
-
-                        <td>Lillian J. Earl</td>
-                        <td>7.6</td>
-                        <td>Social and human service assistant</td>
+                        <td>贴吧 </td>
+                        <td>小米枪战</td>
+                        <td>2018-2-18</td>
                         <td>
                             <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                Edit
+                                修改任务
                             </a>
 
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                Delete
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                Profile
+                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
+                                删除任务
                             </a>
                         </td>
                     </tr>
                     <tr role="row" class="odd">
-
-                        <td>Ellen C. Jones</td>
-                        <td>7.2</td>
-                        <td>Education and development manager</td>
+                        <td>贴吧 </td>
+                        <td>小米枪战</td>
+                        <td>2018-2-18</td>
                         <td>
                             <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                Edit
+                                修改任务
                             </a>
 
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                Delete
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                Profile
+                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
+                                删除任务
                             </a>
                         </td>
                     </tr>
                     <tr role="row" class="even">
-
-                        <td>Randy S. Smith</td>
-                        <td>8.7</td>
-                        <td>Social and human service</td>
+                        <td>贴吧 </td>
+                        <td>小米枪战</td>
+                        <td>2018-2-18</td>
                         <td>
                             <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                Edit
+                                修改任务
                             </a>
 
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                Delete
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                Profile
+                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
+                                删除任务
                             </a>
                         </td>
                     </tr>
                     <tr role="row" class="odd">
-                        <td>Jennifer J. Jefferson</td>
-                        <td>10</td>
-                        <td>Maxillofacial surgeon</td>
+                        <td>贴吧 </td>
+                        <td>小米枪战</td>
+                        <td>2018-2-18</td>
                         <td>
                             <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                Edit
+                                修改任务
                             </a>
 
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                Delete
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                Profile
+                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
+                                删除任务
                             </a>
                         </td>
                     </tr>
                     <tr role="row" class="even">
-                        <td>Carl D. Kaya</td>
-                        <td>9.5</td>
-                        <td>Express Merchant Service</td>
+                        <td>贴吧 </td>
+                        <td>小米枪战</td>
+                        <td>2018-2-18</td>
                         <td>
                             <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                Edit
+                                修改任务
                             </a>
 
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                Delete
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                Profile
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>April L. Baker <span class="label label-success">New Applicant</span></td>
-                        <td>6.8</td>
-                        <td>Set and exhibit designer</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                Edit
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                Delete
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                Profile
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>Randy S. Smith</td>
-                        <td>8.7</td>
-                        <td>Social and human service</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                Edit
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                Delete
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                Profile
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>Jennifer J. Jefferson</td>
-                        <td>10</td>
-                        <td>Maxillofacial surgeon</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                Edit
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                Delete
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                Profile
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>Carl D. Kaya</td>
-                        <td>9.5</td>
-                        <td>Express Merchant Service</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                Edit
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                Delete
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                Profile
+                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
+                                删除任务
                             </a>
                         </td>
                     </tr>
@@ -333,14 +224,5 @@
 
         </div>
     </div>
-    <script src="/assets/js/datatables/js/jquery.dataTables.min.js"
-            th:src="@{/assets/js/datatables/js/jquery.dataTables.min.js}"></script>
-    <script src="/assets/js/datatables/dataTables.bootstrap.js"
-            th:src="@{/assets/js/datatables/dataTables.bootstrap.js}"></script>
-    <script src="/assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"
-            th:src="@{/assets/js/datatables/yadcf/jquery.dataTables.yadcf.js}"></script>
-    <script src="/assets/js/datatables/tabletools/dataTables.tableTools.min.js"
-            th:src="@{/assets/js/datatables/tabletools/dataTables.tableTools.min.js}"></script>
-
 </MainContent>
 </html>

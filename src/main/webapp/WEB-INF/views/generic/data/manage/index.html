@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::MainContent},~{ },~{ })">
-<MainContent>
+      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::MainContent},~{::script},~{ })">
 
+<script src="/assets/js/datatables/js/jquery.dataTables.min.js"
+        th:src="@{/assets/js/datatables/js/jquery.dataTables.min.js}"></script>
+<script src="/assets/js/datatables/dataTables.bootstrap.js"
+        th:src="@{/assets/js/datatables/dataTables.bootstrap.js}"></script>
+<script src="/assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"
+        th:src="@{/assets/js/datatables/yadcf/jquery.dataTables.yadcf.js}"></script>
+<script src="/assets/js/datatables/tabletools/dataTables.tableTools.min.js"
+        th:src="@{/assets/js/datatables/tabletools/dataTables.tableTools.min.js}"></script>
+<MainContent>
+    <link rel="stylesheet" href="/assets/js/datatables/dataTables.bootstrap.css"
+          th:href="@{/assets/js/datatables/dataTables.bootstrap.css}">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">数据管理</h3>

@@ -37,8 +37,18 @@ public abstract class AbstractWeiboProcessor {
         header.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
         String homeList = HttpClientUtil.doGet(url);
         JSONObject jsonObject = JSON.parseObject(homeList);
-        int total = jsonObject.getJSONObject("data").getJSONObject("cardlistInfo").getIntValue("total");
-        int pageSize = total / 10 + 1;
+        JSONObject jsonObject1=jsonObject.getJSONObject("data");
+        int pageSize=0;
+        if(jsonObject1!=null)
+        {
+            JSONObject jsonObject2=jsonObject1.getJSONObject("cardlistInfo");
+            if (jsonObject2!=null)
+            {
+                int total = jsonObject2.getIntValue("total");
+                 pageSize = total / 10 + 1;
+            }
+        }
+
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         for (int m = 1; m < pageSize + 1; m++) {
             String targetUrl = null;

@@ -28,7 +28,7 @@ public class WeiboProducerProcessor extends AbstractWeiboProcessor {
     @Autowired
     private SpiderLastTimeService spiderLastTimeService;
     public void save(Future<List<WeiboDto>> listFuture) {
-        Long time = spiderLastTimeService.selectLastTime("producerWeibo");
+
         try {
             List<WeiboDto> weiboDtos = listFuture.get();
             if (listFuture.isDone()) {
@@ -36,6 +36,7 @@ public class WeiboProducerProcessor extends AbstractWeiboProcessor {
                 logger.info("WeiboProducerProcessor 生成内容数量：" + weiboDtos.size());
                 List<WeiboDto> weiboDtoList=new CopyOnWriteArrayList<>(weiboDtos);
                 //判断是否入库
+                Long time = spiderLastTimeService.selectLastTime("producerWeibo");
                 handleData.checkIsWriteDB(time, weiboDtoList);
                 logger.info("WeiboProducerProcessor 入库检查完成 马上进行入库");
                 if (listFuture.get().size() != 0) {

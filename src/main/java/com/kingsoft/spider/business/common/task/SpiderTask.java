@@ -90,7 +90,7 @@ public class SpiderTask {
     private boolean testFlag = false;
 
     private final Logger logger = LoggerFactory.getLogger(SpiderTask.class);
-    @Scheduled(cron = "0 0 20 ? * MON,THU")
+    @Scheduled(cron = "0 0 13 ? * WED,FRI")
     public void initTask(){
         extopiaWeiboSpider();
         xmqzWeiboSpider();
