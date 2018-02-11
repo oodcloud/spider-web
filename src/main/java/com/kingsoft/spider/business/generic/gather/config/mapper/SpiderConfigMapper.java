@@ -1,6 +1,6 @@
 package com.kingsoft.spider.business.generic.gather.config.mapper;
 
-import com.kingsoft.spider.business.generic.gather.config.dto.SpiderConfigEntity;
+import com.kingsoft.spider.business.spidercore.common.SpiderConfigEntity;
 import com.kingsoft.spider.core.common.mybatis.Mapper;
 
 /**

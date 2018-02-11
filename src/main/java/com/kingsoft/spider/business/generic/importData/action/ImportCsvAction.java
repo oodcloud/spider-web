@@ -33,7 +33,7 @@ public class ImportCsvAction extends BaseController {
 
     @RequestMapping("index.html")
     public String index() {
-        return thymeleaf("generic/import/index");
+        return thymeleaf("index");
     }
 
     @ResponseBody

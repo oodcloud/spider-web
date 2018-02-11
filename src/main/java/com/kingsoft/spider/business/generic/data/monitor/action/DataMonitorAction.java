@@ -17,8 +17,7 @@ public class DataMonitorAction extends BaseController{
 
     @RequestMapping("index.html")
     public String index(){
-
-        return thymeleaf("/generic/data/monitor/index");
+        return thymeleaf("index");
     }
 
 }

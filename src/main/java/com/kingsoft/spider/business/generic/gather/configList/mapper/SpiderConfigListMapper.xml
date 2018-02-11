@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.kingsoft.spider.business.generic.gather.configList.mapper.SpiderConfigListMapper">
+    <delete id="delete">
+        DELETE  FROM spider_config WHERE id=#{id}
+    </delete>
+    <select id="getList"
+            resultType="com.kingsoft.spider.business.generic.gather.configList.dto.SpiderConfigListDto">
+        SELECT id,group_name AS groupName,item_name AS itemName,modification_time AS modificationTime
+         FROM spider_config
+    </select>
+    <select id="getEditList"
+            resultType="com.kingsoft.spider.business.spidercore.common.SpiderConfigEntity">
+         SELECT common_url AS commonUrl,url_rule AS urlRule,
+         growth_pattern AS growthPattern,start_num AS startNum,
+         end_num AS endNum,group_name AS groupName,item_name AS itemName,
+         site_name AS siteName,domain AS domain,charset AS charset,
+          user_agent AS userAgent,cookies AS cookies,sleep_time AS sleepTime,
+          time_out AS timeOut,thread AS thread,match_fields AS matchFields,headers AS headers
+         FROM spider_config WHERE id =#{id}
+    </select>
 </mapper>

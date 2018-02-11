@@ -1,6 +1,6 @@
 package com.kingsoft.spider.business.generic.gather.config.service.impl;
 
-import com.kingsoft.spider.business.generic.gather.config.dto.SpiderConfigEntity;
+import com.kingsoft.spider.business.spidercore.common.SpiderConfigEntity;
 import com.kingsoft.spider.business.generic.gather.config.mapper.SpiderConfigMapper;
 import com.kingsoft.spider.business.generic.gather.config.service.SpiderConfigService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,10 @@
 package com.kingsoft.spider.business.generic.gather.config.action;
 
 import com.kingsoft.spider.business.generic.gather.config.dto.CommonUrlTestRequest;
-import com.kingsoft.spider.business.generic.gather.config.dto.SpiderConfigEntity;
-import com.kingsoft.spider.business.generic.gather.config.dto.SpiderConfigInfoTransition;
+import com.kingsoft.spider.business.spidercore.common.SpiderConfigEntity;
+import com.kingsoft.spider.business.spidercore.common.SpiderConfigInfoTransition;
 import com.kingsoft.spider.business.generic.gather.config.service.SpiderConfigService;
-import com.kingsoft.spider.core.common.config.SpiderUrlRole;
+import com.kingsoft.spider.business.spidercore.common.SpiderInfoConvert;
 import com.kingsoft.spider.core.common.support.BaseController;
 import com.kingsoft.spider.core.common.support.CommonResponse;
 import org.slf4j.Logger;
@@ -14,9 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by wangyujie on 2017/12/29.
@@ -36,7 +33,7 @@ public class SpiderConfigAction extends BaseController {
      */
     @RequestMapping("index.html")
     public String startIndex() {
-        return thymeleaf("generic/gather/config/index");
+        return thymeleaf("index");
     }
 
     /**
@@ -49,19 +46,8 @@ public class SpiderConfigAction extends BaseController {
     @ResponseBody
     public CommonResponse getTestCommonUrl(CommonUrlTestRequest request) {
         CommonResponse commonResponse = CommonResponse.createCommonResponse();
-        String commonUrl = request.getCommonUrl();
-        int startNum = request.getStartNum();
-        int endNum = request.getEndNum();
-        int growthPattern = request.getGrowthPattern();
-        int urlRule = request.getUrlRule();
-        if (!commonUrl.contains("http://") && !commonUrl.contains("https://")) {
-            commonUrl = "http://" + commonUrl;
-        }
-        String[] commonUrlArray = commonUrl.split("\\*");
-        String commonUrlFrom = commonUrlArray[0];
-        List<String> urls = new ArrayList<>();
-        createUrlList(startNum, endNum, growthPattern, urlRule, commonUrlArray, commonUrlFrom, urls);
-        commonResponse.setData(urls);
+        SpiderInfoConvert convertDo=new SpiderInfoConvert();
+        commonResponse.setData(convertDo.getTargetUrlList(request));
         return commonResponse;
     }
 
@@ -88,41 +74,4 @@ public class SpiderConfigAction extends BaseController {
         return commonResponse;
     }
 
-    private void createUrlList(int startNum, int endNum, int growthPattern, int urlRule, String[] commonUrlArray, String commonUrlFrom, List<String> urls) {
-        switch (urlRule) {
-            case SpiderUrlRole.GROWTHPATTERN_GEOMETRIC://等比
-                if (growthPattern == 1) {
-                    return;
-                }
-                for (int i = startNum; i <= endNum; i = i * growthPattern) {
-                    if (commonUrlArray.length > 1) {
-                        String commonUrlTo = commonUrlArray[1];
-                        urls.add(commonUrlFrom + i + commonUrlTo);
-                    } else {
-                        urls.add(commonUrlFrom + i);
-                    }
-                }
-                break;
-            case SpiderUrlRole.GROWTHPATTERN_MONOTONE_INCREASING://单调递增
-                for (int i = startNum; i <= endNum; i = i + growthPattern) {
-                    if (commonUrlArray.length > 1) {
-                        String commonUrlTo = commonUrlArray[1];
-                        urls.add(commonUrlFrom + i + commonUrlTo);
-                    } else {
-                        urls.add(commonUrlFrom + i);
-                    }
-                }
-                break;
-            case SpiderUrlRole.GROWTHPATTERN_MONOTONE_DECREASING://单调递减
-                for (int i = startNum; i <= endNum; i = i - growthPattern) {
-                    if (commonUrlArray.length > 1) {
-                        String commonUrlTo = commonUrlArray[1];
-                        urls.add(commonUrlFrom + i + commonUrlTo);
-                    } else {
-                        urls.add(commonUrlFrom + i);
-                    }
-                }
-                break;
-        }
-    }
 }

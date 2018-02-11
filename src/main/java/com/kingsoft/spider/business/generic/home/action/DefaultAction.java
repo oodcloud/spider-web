@@ -39,6 +39,6 @@ public class DefaultAction extends BaseController{
         defaultDto.setWeiboProducerCommentCount(defaultService.getWeiboProducerCommentCount());
         defaultDto.setWeiboXmqzCommentCount(defaultService.getWeiboXmqzCommentCount());
         model.addAttribute("dataCount",defaultDto);
-        return thymeleaf("generic/index");
+        return thymeleaf("index");
     }
 }

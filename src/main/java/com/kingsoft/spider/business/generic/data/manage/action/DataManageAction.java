@@ -17,7 +17,7 @@ public class DataManageAction extends BaseController{
 
     @RequestMapping("index.html")
     public String index(){
-        return thymeleaf("/generic/data/manage/index");
+        return thymeleaf("index");
     }
 
 }

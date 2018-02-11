@@ -1,4 +1,4 @@
-package com.kingsoft.spider.business.generic.gather.config.dto;
+package com.kingsoft.spider.business.spidercore.common;
 
 /**
  * Created by wangyujie on 2018/1/23.

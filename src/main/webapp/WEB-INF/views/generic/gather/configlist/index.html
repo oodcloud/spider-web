@@ -11,6 +11,8 @@
 <script src="/assets/js/datatables/tabletools/dataTables.tableTools.min.js"
         th:src="@{/assets/js/datatables/tabletools/dataTables.tableTools.min.js}"></script>
 
+<script th:src="@{/assets/generic/gather/configlist/index.js}" src="/assets/generic/gather/configlist/index.js"></script>
+
 <MainContent>
     <link rel="stylesheet" href="/assets/js/datatables/dataTables.bootstrap.css"
           th:href="@{/assets/js/datatables/dataTables.bootstrap.css}">
@@ -68,147 +70,20 @@
                     </thead>
 
                     <tbody class="middle-align">
+                        <tr th:each="item  : ${list}"  th:class="${itemStat.odd}? 'odd':'even'" role="row"  >
+                            <td th:text="${item.groupName}">小米枪战</td>
+                            <td th:text="${item.itemName}">微博</td>
+                            <td th:text="${item.modificationTime}">2017-2-9</td>
+                            <td>
+                                <a href="#" th:href="'edit.html?id='+${item.id}"  class="btn btn-secondary btn-sm btn-icon icon-left">
+                                    修改任务
+                                </a>
 
-                    <tr role="row" class="odd">
-                        <td>贴吧 </td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                修改任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                删除任务
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 </td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                修改任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                删除任务
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 </td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                修改任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                删除任务
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 </td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                修改任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                删除任务
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧</td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                修改任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                删除任务
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 </td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                修改任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                删除任务
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 </td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                修改任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                删除任务
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 </td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                修改任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                删除任务
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 </td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                修改任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                删除任务
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 </td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                修改任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                删除任务
-                            </a>
-                        </td>
-                    </tr>
+                                <a href="#" th:href="'del.html?id='+${item.id}" class="btn btn-turquoise btn-sm btn-icon icon-left">
+                                    删除任务
+                                </a>
+                            </td>
+                        </tr>
 
                     </tbody>
                 </table>

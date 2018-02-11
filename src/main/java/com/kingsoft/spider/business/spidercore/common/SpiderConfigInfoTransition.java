@@ -1,4 +1,4 @@
-package com.kingsoft.spider.business.generic.gather.config.dto;
+package com.kingsoft.spider.business.spidercore.common;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -8,9 +8,11 @@ import org.apache.commons.lang.math.NumberUtils;
 import java.util.*;
 
 /**
+ * 配置信息转换
  * Created by wangyujie on 2018/1/23.
  */
 public class SpiderConfigInfoTransition {
+
     public SpiderConfigInfoDto getSpiderConfigInfoDto(String contents) {
         JSONObject jsonObject = JSONObject.parseObject(contents);
         String commonUrl = jsonObject.getString("commonUrl");
@@ -28,7 +30,7 @@ public class SpiderConfigInfoTransition {
         String sleepTime = jsonObject.getString("retryTimes");
         String timeOut = jsonObject.getString("timeOut");
         String thread = jsonObject.getString("thread");
-        String headers=jsonObject.getString("headers");
+        String headers = jsonObject.getString("headers");
         Set<Map.Entry<String, Object>> set = jsonObject.entrySet();
         Iterator<Map.Entry<String, Object>> iterators = set.iterator();
         List<SpiderConfigInfoDto.MatchField> list = new ArrayList<>();
@@ -101,7 +103,73 @@ public class SpiderConfigInfoTransition {
         entity.setUserAgent(spiderConfigInfoDto.getUserAgent());
         entity.setHeaders(spiderConfigInfoDto.getHeaders());
         entity.setGeneratedTime(System.currentTimeMillis());
-       return entity;
+        return entity;
+    }
+
+
+    public SpiderConfigEntity switchToEntity(SpiderConfigInfoDto dto) {
+        SpiderConfigEntity entity = new SpiderConfigEntity();
+        entity.setCharset(dto.getCharset());
+        entity.setCommonUrl(dto.getCommonUrl());
+        entity.setCookies(dto.getCookies());
+        entity.setDomain(dto.getDomain());
+        entity.setEndNum(Integer.valueOf(dto.getEndNum()));
+        entity.setGroupName(dto.getGroupName());
+        entity.setGrowthPattern(Integer.valueOf(dto.getGrowthPattern()));
+        entity.setHeaders(dto.getHeaders());
+        entity.setItemName(dto.getItemName());
+        entity.setMatchFields(JSON.toJSONString(dto.getMatchFields()));
+        entity.setSiteName(dto.getSiteName());
+        entity.setSleepTime(Integer.valueOf(dto.getSleepTime()));
+        entity.setStartNum(Integer.valueOf(dto.getStartNum()));
+        entity.setThread(Integer.valueOf(dto.getThread()));
+        entity.setTimeOut(Integer.valueOf(dto.getTimeOut()));
+        entity.setUrlRule(Integer.valueOf(dto.getUrlRule()));
+        entity.setUserAgent(dto.getUserAgent());
+        entity.setGeneratedTime(dto.getGeneratedTime());
+        return entity;
+    }
+
+    public List<SpiderConfigEntity> switchToEntity(List<SpiderConfigInfoDto> list) {
+        List<SpiderConfigEntity> entityList = new ArrayList<>();
+        for (SpiderConfigInfoDto dto : list) {
+            SpiderConfigEntity entity = switchToEntity(dto);
+            entityList.add(entity);
+        }
+        return entityList;
+    }
+
+
+    public SpiderConfigInfoDto switchToDto(SpiderConfigEntity dto) {
+        SpiderConfigInfoDto infoDto = new SpiderConfigInfoDto();
+        infoDto.setCharset(dto.getCharset());
+        infoDto.setCommonUrl(dto.getCommonUrl());
+        infoDto.setCookies(dto.getCookies());
+        infoDto.setDomain(dto.getDomain());
+        infoDto.setEndNum(String.valueOf(dto.getEndNum()));
+        infoDto.setGroupName(dto.getGroupName());
+        infoDto.setGrowthPattern(String.valueOf(dto.getGrowthPattern()));
+        infoDto.setHeaders(dto.getHeaders());
+        infoDto.setItemName(dto.getItemName());
+        infoDto.setMatchFields(JSON.parseArray(dto.getMatchFields(), SpiderConfigInfoDto.MatchField.class));
+        infoDto.setSiteName(dto.getSiteName());
+        infoDto.setSleepTime(String.valueOf(dto.getSleepTime()));
+        infoDto.setStartNum(String.valueOf(dto.getStartNum()));
+        infoDto.setThread(String.valueOf(dto.getThread()));
+        infoDto.setTimeOut(String.valueOf(dto.getTimeOut()));
+        infoDto.setUrlRule(String.valueOf(dto.getUrlRule()));
+        infoDto.setUserAgent(dto.getUserAgent());
+        infoDto.setGeneratedTime(dto.getGeneratedTime());
+        return infoDto;
+    }
+
+    public List<SpiderConfigInfoDto> switchToDto(List<SpiderConfigEntity> list) {
+        List<SpiderConfigInfoDto> entityList = new ArrayList<>();
+        for (SpiderConfigEntity dto : list) {
+            SpiderConfigInfoDto entity = switchToDto(dto);
+            entityList.add(entity);
+        }
+        return entityList;
     }
 
 }

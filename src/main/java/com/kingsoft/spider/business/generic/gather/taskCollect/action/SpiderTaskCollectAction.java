@@ -17,6 +17,6 @@ public class SpiderTaskCollectAction extends BaseController{
 
     @RequestMapping("index.html")
     public String index(){
-        return thymeleaf("/generic/gather/taskcollect/index");
+        return thymeleaf("index");
     }
 }

@@ -1,6 +1,6 @@
 package com.kingsoft.spider.business.generic.gather.config.service;
 
-import com.kingsoft.spider.business.generic.gather.config.dto.SpiderConfigEntity;
+import com.kingsoft.spider.business.spidercore.common.SpiderConfigEntity;
 
 /**
  * Created by wangyujie on 2018/1/23.

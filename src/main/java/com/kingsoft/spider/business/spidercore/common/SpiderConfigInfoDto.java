@@ -1,4 +1,4 @@
-package com.kingsoft.spider.business.generic.gather.config.dto;
+package com.kingsoft.spider.business.spidercore.common;
 
 import java.util.List;
 
@@ -23,6 +23,17 @@ public class SpiderConfigInfoDto {
     private String thread;
     private String headers;
     private List<MatchField> matchFields;
+    private Long generatedTime;
+
+
+
+    public Long getGeneratedTime() {
+        return generatedTime;
+    }
+
+    public void setGeneratedTime(Long generatedTime) {
+        this.generatedTime = generatedTime;
+    }
 
     public List<MatchField> getMatchFields() {
         return matchFields;
