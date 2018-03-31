@@ -1,6 +1,5 @@
 package com.kingsoft.spider.core.common.shiro;
 
-import com.kingsoft.spider.core.common.support.MD5Utils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.util.ByteSource;

@@ -1,40 +1,178 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::MainContent},~{},~{ })">
-
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/main-layout ::common(~{::MainContent},~{::script},~{::PageContainerBelow})">
+<script src="/assets/js/rwd-table/js/rwd-table.min.js" th:src="@{/assets/js/rwd-table/js/rwd-table.min.js}"></script>
+<script src="/assets/js/mricode.pagination.js" th:src="@{/assets/js/mricode.pagination.js}"></script>
 <MainContent>
+    <link rel="stylesheet" href="/assets/js/rwd-table/css/rwd-table.min.css"
+          th:href="@{/assets/js/rwd-table/css/rwd-table.min.css}">
+    <link rel="stylesheet" href="/assets/css/mricode.pagination.css"
+          th:href="@{/assets/css/mricode.pagination.css}">
     <div class="col-md-9"></div>
     <div class="col-md-3">
         <div class="btn-group">
-            <button type="button" onclick="window.open('druid.html')"  class="btn btn-purple">druid监控</button>
+            <button type="button" onclick="window.open('druid.html')" class="btn btn-purple">druid监控</button>
         </div>
     </div>
     <div class="col-md-12">
-
         <div class="tabs-vertical-env">
-
             <ul class="nav tabs-vertical">
                 <li class=""><a href="#v-changepassword" data-toggle="tab">修改密码</a></li>
+                <th:block th:if="${role==1}">
                 <li class=""><a href="#v-user" data-toggle="tab">用户管理</a></li>
-                <li class=""><a href="#v-role" data-toggle="tab">角色管理</a></li>
+                </th:block>
+                <!--<li class=""><a href="#v-role" data-toggle="tab">角色管理</a></li>-->
             </ul>
-
             <div class="tab-content">
                 <div class="tab-pane" id="v-changepassword">
-                 <div th:replace="~{core/changepassword/index :: body}"></div>
+                    <div th:replace="~{core/changepassword/index :: body}"></div>
                 </div>
-                <div class="tab-pane" id="v-user">
-                  <th:block th:replace="~{common/developing :: strive}"></th:block>
-                </div>
-                <div class="tab-pane" id="v-role">
-                    <th:block th:replace="~{common/developing :: strive}"></th:block>
-                </div>
+                <th:block th:if="${role==1}">
+                    <div class="tab-pane" id="v-user">
+                        <th:block th:replace="~{core/user/index :: body}"></th:block>
+                    </div>
+                </th:block>
 
-
+                <!--<div class="tab-pane" id="v-role">-->
+                <!--<th:block th:replace="~{core/role/index :: body}"></th:block>-->
+                <!--</div>-->
+                <div class="show-msg"></div>
             </div>
-
         </div>
-
     </div>
 </MainContent>
+<PageContainerBelow>
+    <th:block th:if="${role==1}">
+        <div class="modal fade" id="operation-user">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">添加用户</h4>
+                    </div>
+                    <form role="form" id="operation-user-form">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="username" class="control-label">用户名</label>
+                                        <input type="text" class="form-control" id="username" name="userName"
+                                               placeholder="请输入用户名">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="password" class="control-label">密码</label>
+                                        <input type="password" class="form-control" id="password" name="passWord"
+                                               placeholder="请输入密码">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="two-password" class="control-label">密码</label>
+                                        <input type="password" class="form-control" id="two-password"
+                                               placeholder="请再次输入密码">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="email" class="control-label">电子邮箱</label>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                               placeholder="请输入电子邮箱">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-info operation-user-submit">提交</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="operation-user-msg"></div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="edit-user">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">更新用户信息</h4>
+                    </div>
+                    <form role="form" id="edit-user-form">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="edit-username" class="control-label">用户名</label>
+                                        <input type="text" class="form-control" id="edit-username" name="userName"
+                                               placeholder="请输入用户名">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="edit-password" class="control-label">密码</label>
+                                        <input type="password" class="form-control" id="edit-password" name="passWord"
+                                               placeholder="请输入密码">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="edit-two-password" class="control-label">密码</label>
+                                        <input type="password" class="form-control" id="edit-two-password"
+                                               placeholder="请再次输入密码">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="edit-email" class="control-label">电子邮箱</label>
+                                        <input type="email" class="form-control" id="edit-email" name="email"
+                                               placeholder="请输入电子邮箱">
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="id" id="update-user-id">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-info edit-user-submit">提交</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="edit-user-msg"></div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-user-del" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" aria-hidden="true">×</button>
+                        <h4 class="modal-title">提示框</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        是否删除该任务
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">否</button>
+                        <button type="button" data-dismiss="modal" class="btn btn-info execute-user-del">是</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</PageContainerBelow>
+
 </html>

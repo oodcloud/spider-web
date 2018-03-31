@@ -1,6 +1,9 @@
 package com.kingsoft.spider.business.generic.gather.onlineCollect.service;
 
+import com.kingsoft.spider.business.generic.gather.onlineCollect.dto.SpiderLogInfoDto;
 import com.kingsoft.spider.business.generic.gather.onlineCollect.dto.SpiderOnlineCollectDto;
+import com.kingsoft.spider.business.generic.gather.onlineCollect.dto.SpiderStatusDto;
+import com.kingsoft.spider.business.generic.gather.onlineCollect.dto.SpiderStatusTimerDto;
 
 import java.util.List;
 
@@ -9,5 +12,8 @@ import java.util.List;
  */
 public interface SpiderOnlineCollectService {
     List<SpiderOnlineCollectDto> getAll();
-
+    SpiderStatusDto start(Integer id);
+    SpiderStatusDto stop(String uuid);
+    List<SpiderStatusTimerDto> getSpiderStutas();
+    SpiderLogInfoDto getSpiderLogInfo(String uuid, Integer index);
 }

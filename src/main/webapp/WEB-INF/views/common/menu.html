@@ -2,65 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--菜单列表-->
 <th:block th:fragment="content">
+
     <li>
-        <a href="#">
-            <i class="linecons-cog"></i>
-            <span class="title">采集</span>
-        </a>
-        <ul>
-            <li>
-                <a href="/generic/gather/config/index.html" th:href="@{/generic/gather/config/index.html}" >
-                    <span class="title">采集配置</span>
-                </a>
-            </li>
-            <li>
-                <a href="/generic/gather/configlist/index.html" th:href="@{/generic/gather/configlist/index.html}" >
-                    <span class="title">配置列表</span>
-                </a>
-            </li>
-            <li>
-                <a href="/generic/gather/onlinecollect/index.html" th:href="@{/generic/gather/onlinecollect/index.html}" >
-                    <span class="title">在线采集</span>
-                </a>
-            </li>
-            <li>
-                <a href="/generic/gather/taskcollect/index.html" th:href="@{/generic/gather/taskcollect/index.html}" >
-                    <span class="title">定时采集</span>
-                </a>
-            </li>
-        </ul>
+    <a href="/generic/gather/config/index.html" th:href="@{/generic/gather/config/index.html}">
+        <i class="linecons-diamond"></i>
+        <span class="title">采集配置</span>
+    </a>
     </li>
     <li>
-        <a href="/generic/index.html" th:href="@{/generic/index.html}" >
-            <i class="linecons-desktop"></i>
-            <span class="title">数据</span>
-        </a>
-        <ul>
-            <li>
-                <a href="/generic/data/manage/index.html" th:href="@{/generic/data/manage/index.html}" >
-                    <span class="title">数据管理</span>
-                </a>
-            </li>
-            <li>
-                <a href="/generic/data/monitor/index.html" th:href="@{/generic/data/monitor/index.html}" >
-                    <span class="title">数据监控</span>
-                </a>
-            </li>
-        </ul>
+    <a href="/generic/gather/configlist/index.html" th:href="@{/generic/gather/configlist/index.html}">
+        <i class="linecons-desktop"></i>
+        <span class="title">配置列表</span>
+    </a>
     </li>
     <li>
-        <a href="/generic/import/index.html" th:href="@{/generic/import/index.html}">
-            <i class="linecons-beaker"></i>
-            <span class="title">数据库配置</span>
-        </a>
+    <a href="/generic/gather/onlinecollect/index.html" th:href="@{/generic/gather/onlinecollect/index.html}">
+        <i class="linecons-globe"></i>
+        <span class="title">在线采集</span>
+    </a>
     </li>
     <li>
-        <a href="/generic/import/index.html" th:href="@{/generic/import/index.html}">
-            <i class="linecons-beaker"></i>
-            <span class="title">导出表</span>
+    <a href="/generic/gather/taskcollect/index.html" th:href="@{/generic/gather/taskcollect/index.html}">
+        <i class="linecons-cd"></i>
+        <span class="title">定时采集</span>
+    </a>
+    </li>
+    <li>
+        <a href="/generic/data/manage/index.html" th:href="@{/generic/data/manage/index.html}">
+            <i class="linecons-params"></i>
+            <span class="title">数据管理</span>
         </a>
     </li>
 
+
+    <!--<li>-->
+    <!--<a href="/generic/data/monitor/index.html" th:href="@{/generic/data/monitor/index.html}">-->
+        <!--<i class="linecons-desktop"></i>-->
+        <!--<span class="title">数据监控</span>-->
+    <!--</a>-->
+    <!--</li>-->
+
+    <!--<li>-->
+        <!--<a href="/generic/import/index.html" th:href="@{/generic/import/index.html}">-->
+            <!--<i class="linecons-beaker"></i>-->
+            <!--<span class="title">导出表</span>-->
+        <!--</a>-->
+    <!--</li>-->
 
 
 </th:block>

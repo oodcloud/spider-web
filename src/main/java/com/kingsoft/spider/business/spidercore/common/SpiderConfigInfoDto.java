@@ -7,12 +7,14 @@ import java.util.List;
  */
 public class SpiderConfigInfoDto {
     private String commonUrl;
+    private String targetUrl;
     private String urlRule;
     private String growthPattern;
     private String startNum;
     private String endNum;
     private String groupName;
     private String itemName;
+    private String retryTimes;
     private String siteName;
     private String domain;
     private String charset;
@@ -24,8 +26,76 @@ public class SpiderConfigInfoDto {
     private String headers;
     private List<MatchField> matchFields;
     private Long generatedTime;
+    private String dbType;
+    private String dbAddress;
+    private String dbName;
+    private String dbUserName;
+    private String dbPassWord;
+    private String dbTable;
 
+    public String getRetryTimes() {
+        return retryTimes;
+    }
 
+    public void setRetryTimes(String retryTimes) {
+        this.retryTimes = retryTimes;
+    }
+
+    public String getDbTable() {
+        return dbTable;
+    }
+
+    public void setDbTable(String dbTable) {
+        this.dbTable = dbTable;
+    }
+
+    public String getDbPassWord() {
+        return dbPassWord;
+    }
+
+    public void setDbPassWord(String dbPassWord) {
+        this.dbPassWord = dbPassWord;
+    }
+
+    public String getDbType() {
+        return dbType;
+    }
+
+    public void setDbType(String dbType) {
+        this.dbType = dbType;
+    }
+
+    public String getDbAddress() {
+        return dbAddress;
+    }
+
+    public void setDbAddress(String dbAddress) {
+        this.dbAddress = dbAddress;
+    }
+
+    public String getDbName() {
+        return dbName;
+    }
+
+    public void setDbName(String dbName) {
+        this.dbName = dbName;
+    }
+
+    public String getDbUserName() {
+        return dbUserName;
+    }
+
+    public void setDbUserName(String dbUserName) {
+        this.dbUserName = dbUserName;
+    }
+
+    public String getTargetUrl() {
+        return targetUrl;
+    }
+
+    public void setTargetUrl(String targetUrl) {
+        this.targetUrl = targetUrl;
+    }
 
     public Long getGeneratedTime() {
         return generatedTime;
@@ -48,6 +118,15 @@ public class SpiderConfigInfoDto {
         private String fieldEnglishName;
         private String regex;
         private String xpath;
+        private String defaultValue;
+
+        public String getDefaultValue() {
+            return defaultValue;
+        }
+
+        public void setDefaultValue(String defaultValue) {
+            this.defaultValue = defaultValue;
+        }
 
         public String getFieldName() {
             return fieldName;

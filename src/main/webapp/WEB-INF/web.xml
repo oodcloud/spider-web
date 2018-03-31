@@ -76,10 +76,10 @@
             <param-name>sessionStatEnable</param-name>
             <param-value>true</param-value>
         </init-param>
-        <init-param>
-            <param-name>principalSessionName</param-name>
-            <param-value>session_user_key</param-value>
-        </init-param>
+        <!--<init-param>-->
+            <!--<param-name>principalSessionName</param-name>-->
+            <!--<param-value>session_user_key</param-value>-->
+        <!--</init-param>-->
         <init-param>
             <param-name>profileEnable</param-name>
             <param-value>true</param-value>

@@ -349,8 +349,7 @@ var public_vars = public_vars || {};
 				$this.selectBoxIt(opts);
 			});
 		}
-		
-		
+
 		
 		// Datepicker
 		if($.isFunction($.fn.datepicker))

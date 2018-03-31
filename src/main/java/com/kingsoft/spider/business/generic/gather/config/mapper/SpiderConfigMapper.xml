@@ -7,6 +7,7 @@
         INSERT INTO spider_config
         (
         common_url,
+        target_url,
         url_rule,
         growth_pattern,
         start_num,
@@ -19,13 +20,21 @@
         user_agent,
         cookies,
         sleep_time,
+        retry_times,
         time_out,
         thread,
         match_fields,
         headers,
-        generated_time
+        generated_time,
+        db_type,
+        db_address,
+        db_name,
+        db_username,
+        db_password,
+        db_table
         )VALUES (
         #{commonUrl},
+        #{targetUrl},
         #{urlRule},
         #{growthPattern},
         #{startNum},
@@ -38,11 +47,18 @@
         #{userAgent},
         #{cookies},
         #{sleepTime},
+        #{retryTimes},
         #{timeOut},
         #{thread},
         #{matchFields},
         #{headers},
-        #{generatedTime}
+        #{generatedTime},
+        #{dbType},
+        #{dbAddress},
+        #{dbName},
+        #{dbUserName},
+        #{dbPassWord},
+        #{dbTable}
         )
     </insert>
 </mapper>

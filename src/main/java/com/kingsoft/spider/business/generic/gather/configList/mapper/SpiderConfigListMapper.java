@@ -1,5 +1,6 @@
 package com.kingsoft.spider.business.generic.gather.configList.mapper;
 
+import com.kingsoft.spider.business.generic.gather.configList.dto.SpiderConfigSaveDto;
 import com.kingsoft.spider.business.spidercore.common.SpiderConfigEntity;
 import com.kingsoft.spider.business.generic.gather.configList.dto.SpiderConfigListDto;
 import com.kingsoft.spider.core.common.mybatis.Mapper;
@@ -14,7 +15,9 @@ import java.util.List;
 public interface SpiderConfigListMapper {
     List<SpiderConfigListDto> getList();
 
-    List<SpiderConfigEntity> getEditList(@Param("id")Long id);
+    SpiderConfigEntity getEditList(@Param("id")Long id);
 
     void delete(@Param("id") Long id);
+
+    void update(SpiderConfigSaveDto spiderConfigEntity);
 }

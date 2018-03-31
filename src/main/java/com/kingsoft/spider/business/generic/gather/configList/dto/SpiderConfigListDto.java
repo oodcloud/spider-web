@@ -8,6 +8,24 @@ public class SpiderConfigListDto {
     private String groupName;
     private String itemName;
     private String modificationTime;
+    private String commonUrl;
+    private String uuid;
+
+    public String getUuid() {
+        return groupName+itemName+commonUrl.hashCode();
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getCommonUrl() {
+        return commonUrl;
+    }
+
+    public void setCommonUrl(String commonUrl) {
+        this.commonUrl = commonUrl;
+    }
 
     public Long getId() {
         return id;

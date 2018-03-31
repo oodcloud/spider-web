@@ -2,18 +2,73 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <div class="panel-body" th:fragment="body">
-    <form role="form" class="form-inline">
+    <form role="form" class="form-inline" >
         <div class="form-group">
-            <input type="text" class="form-control" size="25" placeholder="请输入新密码">
+            <input type="password" id="newAcountpwd1" name="pwd" class="form-control" size="25" placeholder="请输入新密码">
         </div>
 
         <div class="form-group">
-            <input type="password" class="form-control" size="25" placeholder="请再输入新密码">
+            <input type="password"   id="newAcountpwd2" class="form-control" size="25" placeholder="请再输入新密码">
         </div>
 
         <div class="form-group">
-            <button class="btn btn-secondary btn-single">确定</button>
+            <button  type="button" class="btn btn-secondary btn-single" id="changePassword">确定</button>
         </div>
     </form>
+    <script>
+
+        function newPW(){
+            regExp=/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,21}$/;
+            if($("#newAcountpwd1").val()==""){
+                $(".show-msg").append('<div class="col-md-10" id="spider-config-save-show-info"><div class="alert alert-success"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span> <span class="sr-only">Close</span></button> 输入的密码不能为空！</div></div>');
+                return false;
+            }
+            else if(!regExp.test($("#newAcountpwd1").val())){
+                $(".show-msg").append('<div class="col-md-10" id="spider-config-save-show-info"><div class="alert alert-success"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span> <span class="sr-only">Close</span></button> 密码必须6-21字母和数字组成！</div></div>');
+                return false;
+            }
+            else{
+                $(".show-msg").empty();
+                return true;
+            }
+        }
+
+        jQuery(document).ready(function ($) {
+            $("#newAcountpwd1").blur(newPW);
+            $("#changePassword").click(function () {
+                var newAcountpwd1 = $("#newAcountpwd1").val();
+                var newAcountpwd2 = $("#newAcountpwd2").val();
+                if (newAcountpwd1===newAcountpwd2)
+                {
+                    $.ajax({
+                        url:"changePassword.html",
+                        type:"post",
+                        dataType:"json",
+                        data:{
+                            pwd:$("#newAcountpwd1").val()
+                        },
+                        success:function (data) {
+                            if(data.success)
+                            {
+                                $(".show-msg").empty();
+                                $(".show-msg").append('<div class="col-md-10" id="spider-config-save-show-info"><div class="alert alert-success"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span> <span class="sr-only">Close</span></button>  修改成功！</div></div>');
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1000);
+                            }else {
+                                $(".show-msg").empty();
+                                $(".show-msg").append('<div class="col-md-10" id="spider-config-save-show-info"><div class="alert alert-success"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span> <span class="sr-only">Close</span></button>  修改失败！</div></div>');
+                            }
+
+                        }
+                    });
+                }else {
+                    $(".show-msg").empty();
+                    $(".show-msg").append('<div class="col-md-10" id="spider-config-save-show-info"><div class="alert alert-success"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span> <span class="sr-only">Close</span></button>  两次输入的密码不一致！</div></div>');
+                }
+            });
+
+        });
+    </script>
 </div>
 

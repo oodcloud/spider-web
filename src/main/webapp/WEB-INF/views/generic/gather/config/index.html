@@ -7,7 +7,7 @@
         th:src="@{/assets/js/formwizard/jquery.bootstrap.wizard.min.js}"></script>
 <script src="/assets/js/multiselect/js/jquery.multi-select.js"
         th:src="@{/assets/js/multiselect/js/jquery.multi-select.js}"></script>
-<script src="/assets/generic/config/index.js" th:src="@{/assets/generic/gather/config/index.js}"></script>
+<script src="/assets/generic/gather/config/index.js" th:src="@{/assets/generic/gather/config/index.js}"></script>
 <MainContent>
     <form role="forl" id="configurationForm" class="form-wizard validate" novalidate="novalidate">
 
@@ -44,8 +44,14 @@
             </li>
             <li class="ms-hover">
                 <a href="#fwv-6" data-toggle="tab">
-                    保存配置
+                    配置数据库
                     <span>step 6</span>
+                </a>
+            </li>
+            <li class="ms-hover">
+                <a href="#fwv-7" data-toggle="tab">
+                    保存配置
+                    <span>step 7</span>
                 </a>
             </li>
         </ul>
@@ -122,6 +128,20 @@
                         <br>
                     <button type="button" class="btn btn-orange common-url-test">测试url</button>
                     </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group validate-has-error">
+                            <label class="control-label" for="targetUrl">目标Url</label>
+                            <input class="form-control" name="targetUrl" id="targetUrl" data-validate="required"
+                                   placeholder="采集内容页的url" aria-required="true"
+                                   aria-describedby="targetUrl-error" aria-invalid="true">
+                            <span id="targetUrl-error" class="validate-has-error">
+                                详情页面
+                            </span>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
 
@@ -266,14 +286,14 @@
                 <br>
                 <div id="dynamicFields">
                     <div class="row ">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label class="control-label" for="fieldName">字段中文名称</label>
                                 <input  class="form-control" name="fieldName0" id="fieldName"
                                        data-validate="required" placeholder="请输入字段中文名称">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label class="control-label" for="fieldEnglishName">字段英文名称</label>
                                 <input  class="form-control" name="fieldEnglishName0" id="fieldEnglishName"
@@ -294,6 +314,13 @@
                                        placeholder="匹配该字段的Xpath">
                             </div>
                         </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label" for="defaultValue">xpath</label>
+                                <input class="form-control" name="defaultValue" data-validate="require" id="defaultValue"
+                                       placeholder="默认值">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -303,9 +330,69 @@
                 <div class="form-group">
                     <button type="button" class="btn btn-primary executeTest">执行测试</button>
                 </div>
+                <div id="runtestresult" class="row"></div>
             </div>
             <div class="tab-pane with-bg" id="fwv-6">
-                <button type="button" class="btn btn-primary saveConfiguration">保存配置</button>
+                <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group ">
+                        <label class="control-label" for="dbType">数据库类型</label>
+                        <select class="form-control" id="dbType" name="dbType">
+                            <option value="1">mysql</option>
+                            <!--<option value="2">sqlserver</option>-->
+                            <!--<option value="3">oracle</option>-->
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label" for="dbAddress">数据库地址</label>
+                        <input class="form-control" name="dbAddress" data-validate="require" id="dbAddress"
+                               placeholder="数据库地址">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label" for="dbName">数据库名称</label>
+                        <input class="form-control" name="dbName" data-validate="require" id="dbName"
+                               placeholder="数据库名">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label" for="dbUserName">用户名</label>
+                        <input class="form-control" name="dbUserName" data-validate="require" id="dbUserName"
+                               placeholder="数据库用户名">
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label" for="dbPassWord">密码</label>
+                        <input class="form-control" name="dbPassWord" data-validate="require" id="dbPassWord"
+                               placeholder="数据库密码">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <br>
+                    <button type="button" class="btn btn-orange db-url-test">测试数据库</button>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label" for="dbTable">表名</label>
+                        <input class="form-control" name="dbTable" data-validate="require" id="dbTable"
+                               placeholder="表名">
+                    </div>
+                </div>
+                </div>
+                <div class="test-database-msg"></div>
+            </div>
+            <div class="tab-pane with-bg" id="fwv-7">
+                <div class="row">
+                    <button type="button" class="btn btn-primary saveConfiguration">保存配置</button>
+                </div>
+                <div class="spider-config-save-show-info col-md-10"></div>
             </div>
             <!-- Tabs Pager -->
 

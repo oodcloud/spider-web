@@ -1,8 +1,11 @@
 package com.kingsoft.spider.business.spidercore.monitor;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Spider;
@@ -89,4 +92,11 @@ public class SpiderStatus implements SpiderStatusBean {
     public List<String> getAllResultList() {
         return monitorSpiderListener.getAllUrls();
     }
+
+    @Override
+    public String getUUid() {
+        return spider.getUUID();
+    }
+
+
 }

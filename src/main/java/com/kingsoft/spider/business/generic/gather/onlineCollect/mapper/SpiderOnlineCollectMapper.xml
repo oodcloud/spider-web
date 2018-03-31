@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.kingsoft.spider.business.generic.gather.onlineCollect.mapper.SpiderOnlineCollectMapper">
+    <update id="saveTime">
+        UPDATE spider_config SET last_spider_time=#{lastSpiderTime} WHERE id=#{id}
+    </update>
     <select id="getAll"
             resultType="com.kingsoft.spider.business.generic.gather.onlineCollect.dto.SpiderOnlineCollectDto">
-
+       SELECT id,group_name AS groupName,item_name AS itemName,domain,common_url AS commonUrl,last_spider_time AS lastSpiderTime FROM spider_config
     </select>
+    <select id="getSpiderConfigById"
+            resultType="com.kingsoft.spider.business.spidercore.common.SpiderConfigEntity">
+        SELECT common_url AS commonUrl,target_url AS  targetUrl,url_rule AS urlRule,
+         growth_pattern AS growthPattern,start_num AS startNum,
+         end_num AS endNum,group_name AS groupName,item_name AS itemName,
+         site_name AS siteName,domain AS domain,charset AS charset,
+          user_agent AS userAgent,cookies AS cookies,sleep_time AS sleepTime,retry_times AS retryTimes,
+          time_out AS timeOut,thread AS thread,match_fields AS matchFields,headers AS headers,
+          db_type AS dbType, db_address AS dbAddress, db_name AS dbName,
+           db_username AS dbUserName, db_password AS dbPassWord,db_table AS dbTable
+         FROM spider_config WHERE id =#{id}
+    </select>
+
 </mapper>

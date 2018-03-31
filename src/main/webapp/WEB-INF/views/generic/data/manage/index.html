@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::MainContent},~{::script},~{ })">
+      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::MainContent},~{::script},~{::PageContainerBelow})">
+<script src="/assets/js/mricode.pagination.js"
+        th:src="@{/assets/js/mricode.pagination.js}"></script>
+<script src="/assets/generic/data/manage/index.js"
+        th:src="@{/assets/generic/data/manage/index.js}"></script>
+<script src="/assets/js/jedate/jquery.jedate.min.js" th:src="@{/assets/js/jedate/jquery.jedate.min.js}"></script>
+<script src="/assets/js/rwd-table/js/rwd-table.min.js" th:src="@{/assets/js/rwd-table/js/rwd-table.min.js}"></script>
 
-<script src="/assets/js/datatables/js/jquery.dataTables.min.js"
-        th:src="@{/assets/js/datatables/js/jquery.dataTables.min.js}"></script>
-<script src="/assets/js/datatables/dataTables.bootstrap.js"
-        th:src="@{/assets/js/datatables/dataTables.bootstrap.js}"></script>
-<script src="/assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"
-        th:src="@{/assets/js/datatables/yadcf/jquery.dataTables.yadcf.js}"></script>
-<script src="/assets/js/datatables/tabletools/dataTables.tableTools.min.js"
-        th:src="@{/assets/js/datatables/tabletools/dataTables.tableTools.min.js}"></script>
 <MainContent>
-    <link rel="stylesheet" href="/assets/js/datatables/dataTables.bootstrap.css"
-          th:href="@{/assets/js/datatables/dataTables.bootstrap.css}">
+    <link rel="stylesheet" href="/assets/css/jedate/jedate.css"
+          th:href="@{/assets/css/jedate/jedate.css}">
+    <link rel="stylesheet" href="/assets/js/rwd-table/css/rwd-table.min.css"
+          th:href="@{/assets/js/rwd-table/css/rwd-table.min.css}">
+    <link rel="stylesheet" href="/assets/css/mricode.pagination.css"
+          th:href="@{/assets/css/mricode.pagination.css}">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">数据管理</h3>
@@ -26,306 +28,230 @@
         </div>
         <div class="panel-body">
 
-            <script type="text/javascript">
-                jQuery(document).ready(function ($) {
-                    $("#example-2").dataTable({
-                        dom: "t" + "<'row'<'col-xs-6'i><'col-xs-6'p>>",
-                        retrieve: true,
-                        aoColumns: [
-                            null,
-                            null,
-                            null,
-                            null
-                        ]
-                    });
+            <div class="row">
 
-                });
-            </script>
+                <div class="col-sm-3">
+                    <div class="alert alert-default">
+                        <strong>爬虫列表</strong>
+                    </div>
 
-            <div id="example-2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-                <table class="table table-bordered table-striped dataTable no-footer" id="example-2" role="grid"
-                       aria-describedby="example-2_info">
-                    <thead>
-                    <tr role="row">
-                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
-                            aria-label="数据" style="width: 331px;">
-                            任务组
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
-                            aria-label="任务名称" style="width: 194px;">
-                            任务名称
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
-                            aria-label="上次采集时间"
-                            style="width: 397px;">
-                            上次采集时间
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
-                            aria-label="Actions: activate to sort column ascending" style="width: 321px;">
-                            行为
-                        </th>
-                    </tr>
-                    </thead>
+                    <div class="list-group list-group-minimal">
+                        <th:block th:each="item  : ${list}">
+                            <a href="#" class="list-group-item" th:text="${item.uuid}" th:value="${item.id}">
+                            </a>
+                        </th:block>
+                    </div>
+                </div>
 
-                    <tbody class="middle-align">
-                    <tr role="row" class="odd">
-                        <td>微博</td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
+                <div class="col-sm-9 ">
+                    <button class="btn  btn-red  btn-icon  btn-icon-standalone" id="batch-del">
+                        <i class="fa-trash"></i>
+                        <span>批量删除</span>
+                    </button>
 
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
+                    <button class="btn btn-purple  btn-icon  btn-icon-standalone" id="batch-edit">
+                        <i class="linecons-pencil"></i>
+                        <span>批量内容修改</span>
+                    </button>
 
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>微博</td>
-                        <td>自由禁区</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
+                    <button class="btn btn-red btn-icon  btn-icon-standalone" id="all-del">
+                        <i class="fa-trash"></i>
+                        <span>全部删除</span>
+                    </button>
 
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
+                    <button class="btn btn-purple  btn-icon  btn-icon-standalone" id="all-edit">
+                        <i class="linecons-pencil"></i>
+                        <span>全部内容修改</span>
+                    </button>
 
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>微博</td>
-                        <td>反恐行动</td>
-                        <td>2018-2-28</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
+                   <div class="table-responsive" data-pattern="priority-columns">
+                       <table class="table table-small-font table-bordered table-striped">
+                           <thead>
+                           <tr id="table-column-name">
+                           </tr>
+                           </thead>
+                           <tbody id="table-column-data">
+                           </tbody>
+                       </table>
+                   </div>
+                    <div id="page" class="m-pagination"></div>
 
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
+                </div>
 
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧</td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-success">正在运行</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-info">暂停</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
+
 
         </div>
     </div>
 
 </MainContent>
+
+<PageContainerBelow>
+
+    <div class="modal fade" id="modal-batch-del" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">×</button>
+                    <h4 class="modal-title">提示框</h4>
+                </div>
+
+                <div class="modal-body">
+                    是否删除选中的数据
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">否</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-info del-batch-data">是</button>
+                </div>
+            </div>
+            <div class="show-message"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-all-del" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">×</button>
+                    <h4 class="modal-title">提示框</h4>
+                </div>
+
+                <div class="modal-body">
+                    是否删除该表的全部数据
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">否</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-info del-all-data">是</button>
+                </div>
+            </div>
+            <div class="show-message"></div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="replace-all-content">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">替换字段中部分内容</h4>
+                </div>
+                <form role="form" id="replace-all-content-form" >
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="field" class="control-label">修改的字段名（下面表格中的头名字）</label>
+                                    <input type="text" class="form-control" id="field" name="field"
+                                           placeholder="修改的字段名">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="orginContent" class="control-label">要替换内容</label>
+                                    <input type="text" class="form-control" id="orginContent" name="orginContent"
+                                           placeholder="公共替换内容">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="targetContent" class="control-label">替换内容</label>
+                                    <input type="text" class="form-control" id="targetContent" name="targetContent"
+                                           placeholder="要替换的内容">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="startTime" class="control-label">开始时间</label>
+                                <div class="input-group">
+                                    <input type="text"  name="startTime" class="jeinput form-control " id="startTime" placeholder="YYYY-MM-DD hh:mm:ss">
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <label for="endTime" class="control-label">结束时间</label>
+                                <div class="input-group">
+                                    <input type="text"  name="endTime" class="jeinput form-control " id="endTime" placeholder="YYYY-MM-DD hh:mm:ss">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="id" id="replace-all-content-id">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-info replace-all-content-submit">提交</button>
+                    </div>
+                </form>
+            </div>
+            <div class="replace-all-content-msg"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="replace-content-by-id">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">替换字段中部分内容</h4>
+                </div>
+                <form role="form" id="replace-content-by-id-form">
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label for="field-byid" class="control-label">修改的字段名（下面表格中的头名字）</label>
+                                    <input type="text" class="form-control" id="field-byid" name="field"
+                                           placeholder="修改的字段名">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="orginContent-byid" class="control-label">要替换内容</label>
+                                    <input type="text" class="form-control" id="orginContent-byid" name="orginContent"
+                                           placeholder="要替换内容">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="targetContent-byid" class="control-label">替换内容</label>
+                                    <input type="text" class="form-control" id="targetContent-byid" name="targetContent"
+                                           placeholder="替换内容">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="id" id="replace-batches-content-id">
+                        <input type="hidden" name="ids" id="replace-batches-content-ids">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-info replace-content-by-id-submit">提交</button>
+                    </div>
+                </form>
+            </div>
+            <div class="replace-content-by-id-msg"></div>
+        </div>
+    </div>
+
+</PageContainerBelow>
 </html>

@@ -1,8 +1,6 @@
 package com.kingsoft.spider.business.spidercore.monitor;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.SpiderListener;
@@ -10,17 +8,15 @@ import us.codecraft.webmagic.SpiderListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by wangyujie on 2018/2/9.
  */
 public class SpiderMonitorBootstrap {
-    private static SpiderMonitorBootstrap INSTANCE = new SpiderMonitorBootstrap();
-    private AtomicBoolean started = new AtomicBoolean(false);
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private List<SpiderStatusBean> spiderStatuses = new ArrayList();
+    private static volatile SpiderMonitorBootstrap INSTANCE = new SpiderMonitorBootstrap();
+    private List<SpiderStatusBean> spiderStatuses =Collections.synchronizedList( new ArrayList());
 
     protected SpiderMonitorBootstrap() {
     }
@@ -69,21 +65,22 @@ public class SpiderMonitorBootstrap {
         private List<String> allUrls=Collections.synchronizedList(new ArrayList());
 
 
+
         public MonitorSpiderListener() {
+
         }
 
         public void onSuccess(Request request) {
-            successUrls.add(request.getUrl());
-            allUrls.add(request.getUrl()+":成功");
+            this.successUrls.add(request.getUrl());
             this.successCount.incrementAndGet();
+            this.allUrls.add(request.getUrl()+"成功");
         }
 
         public void onError(Request request) {
             this.errorUrls.add(request.getUrl());
-            allUrls.add(request.getUrl()+":失败");
             this.errorCount.incrementAndGet();
+            this.allUrls.add(request.getUrl()+"失败");
         }
-
 
         public AtomicInteger getSuccessCount() {
             return this.successCount;

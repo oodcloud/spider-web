@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::MainContent},~{::script},~{ })">
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/main-layout ::common(~{::MainContent},~{::script},~{::PageContainerBelow })">
 <script src="/assets/js/datatables/js/jquery.dataTables.min.js"
         th:src="@{/assets/js/datatables/js/jquery.dataTables.min.js}"></script>
 <script src="/assets/js/datatables/dataTables.bootstrap.js"
@@ -9,6 +10,8 @@
         th:src="@{/assets/js/datatables/yadcf/jquery.dataTables.yadcf.js}"></script>
 <script src="/assets/js/datatables/tabletools/dataTables.tableTools.min.js"
         th:src="@{/assets/js/datatables/tabletools/dataTables.tableTools.min.js}"></script>
+<script src="/assets/generic/gather/taskcollect/index.js"
+        th:src="@{/assets/generic/gather/taskcollect/index.js}"></script>
 <MainContent>
     <!-- Removing search and results count filter -->
     <div class="panel panel-default">
@@ -26,10 +29,24 @@
 
             <script type="text/javascript">
                 jQuery(document).ready(function ($) {
-                    $("#example-2").dataTable({
+                    $("#plan-task").dataTable({
                         dom: "t" + "<'row'<'col-xs-6'i><'col-xs-6'p>>",
                         retrieve: true,
                         aoColumns: [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ]
+                    });
+
+                    $("#run-task").dataTable({
+                        dom: "t" + "<'row'<'col-xs-6'i><'col-xs-6'p>>",
+                        retrieve: true,
+                        aoColumns: [
+                            null,
                             null,
                             null,
                             null,
@@ -39,24 +56,44 @@
 
                 });
             </script>
-
-            <div id="example-2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-                <table class="table table-bordered table-striped dataTable no-footer" id="example-2" role="grid"
+            <div class="row">
+                <div class="col-sm-9">
+                    <button class="btn btn-secondary btn-icon btn-icon-standalone add-timer-task">
+                        <i class="fa-plus-square-o"></i>
+                        <span>添加任务</span>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <p class="bg-info">计划中的任务</p>
+            </div>
+            <div id="plan-task_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <table class="table table-bordered table-striped dataTable no-footer" id="plan-task" role="grid"
                        aria-describedby="example-2_info">
                     <thead>
                     <tr role="row">
                         <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
-                            aria-label="任务组" style="width: 331px;">
-                            任务组
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
-                            aria-label="任务名称" style="width: 194px;">
+                            aria-label="任务名称" style="width: 151px;">
                             任务名称
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
-                            aria-label="上次采集时间"
-                            style="width: 397px;">
-                            上次采集时间
+                            aria-label="任务分组" style="width: 134px;">
+                            任务分组
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
+                            aria-label="任务状态"
+                            style="width: 197px;">
+                            任务状态
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
+                            aria-label="时间表达式"
+                            style="width: 197px;">
+                            时间表达式
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
+                            aria-label="任务描述"
+                            style="width: 197px;">
+                            任务描述
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
                             aria-label="Actions: activate to sort column ascending" style="width: 321px;">
@@ -66,263 +103,253 @@
                     </thead>
 
                     <tbody class="middle-align">
-                    <tr role="row" class="odd">
-                        <td>微博</td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
+                    <tr th:each="item  : ${scheduleJobList}" th:class="${itemStat.odd}? 'odd':'even'" role="row">
+                        <td th:text="${item.jobName}">微博</td>
+                        <td th:text="${item.jobGroup}">小米枪战</td>
+                        <td th:text="${item.status}">运行中</td>
+                        <td th:text="${item.cronExpression}">1.1.1.11.*?</td>
+                        <td th:text="${item.description}">每天12点定时取内容</td>
                         <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
+                            <button
+                                    th:value="${item.scheduleJobId}"
+                                    class="btn  btn-secondary btn-icon btn-icon-standalone btn-sm timer-task-edit">
+                                <i class="fa-cog"></i>
+                                <span>修改</span>
+                            </button>
+                            <button
+                                    th:value="${item.scheduleJobId}"
+                                    class="btn  btn-info btn-icon btn-icon-standalone btn-sm timer-task-pause">
+                                <i class="fa-pause"></i>
+                                <span>暂停</span>
+                            </button>
+                            <button
+                                    th:value="${item.scheduleJobId}"
+                                    class="btn  btn-info btn-icon btn-icon-standalone btn-sm timer-task-resume">
+                                <i class="fa-play"></i>
+                                <span>恢复</span>
+                            </button>
 
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
+                            <button
+                                    th:value="${item.scheduleJobId}"
+                                    class="btn btn-info btn-icon btn-icon-standalone btn-sm timer-task-del">
+                                <i class="fa-trash"></i>
+                                <span>刪除</span>
+                            </button>
+                        </td>
                         </td>
                     </tr>
-                    <tr role="row" class="even">
-                        <td>微博</td>
-                        <td>自由禁区</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <p class="bg-success">运行中的任务</p>
+            </div>
+            <div id="run-task_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <table class="table table-bordered table-striped dataTable no-footer" id="run-task" role="grid"
+                       aria-describedby="example-2_info">
+                    <thead>
+                    <tr role="row">
+                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
+                            aria-label="任务名称" style="width: 151px;">
+                            任务名称
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
+                            aria-label="任务分组" style="width: 134px;">
+                            任务分组
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
+                            aria-label="任务状态"
+                            style="width: 197px;">
+                            任务状态
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
+                            aria-label="时间表达式"
+                            style="width: 197px;">
+                            时间表达式
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
+                            aria-label="任务描述"
+                            style="width: 197px;">
+                            任务描述
+                        </th>
 
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
                     </tr>
-                    <tr role="row" class="odd">
-                        <td>微博</td>
-                        <td>反恐行动</td>
-                        <td>2018-2-28</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
+                    </thead>
 
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧</td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-success">正在运行</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-info">暂停</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                配置定时任务
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left">
-                                刪除定時任務
-                            </a>
-                        </td>
+                    <tbody class="middle-align">
+                    <tr th:each="item  : ${executingJobList}" th:class="${itemStat.odd}? 'odd':'even'" role="row">
+                        <td th:text="${item.jobName}"></td>
+                        <td th:text="${item.jobGroup}"></td>
+                        <td th:text="${item.status}"></td>
+                        <td th:text="${item.cronExpression}"></td>
+                        <td th:text="${item.description}"></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
 
         </div>
+        <div class="show-message"></div>
     </div>
 </MainContent>
+
+<PageContainerBelow>
+
+    <div class="modal fade" id="modal-del" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">×</button>
+                    <h4 class="modal-title">提示框</h4>
+                </div>
+
+                <div class="modal-body">
+                    是否删除该定时任务
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">否</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-info del-timer-task">是</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-resume" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">×</button>
+                    <h4 class="modal-title">提示框</h4>
+                </div>
+
+                <div class="modal-body">
+                    是否恢复该定时任务
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">否</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-info resume-timer-task">是</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modal-stop" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">×</button>
+                    <h4 class="modal-title">提示框</h4>
+                </div>
+
+                <div class="modal-body">
+                    是否暂停该定时任务
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">否</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-info stop-timer-task">是</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="add-task-model">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">添加定时任务</h4>
+                </div>
+                <form role="form" id="timer-task-form" action="/generic/gather/taskcollect/save.html"
+                      th:action="@{/generic/gather/taskcollect/save.html}" method="post">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label for="jobName" class="control-label">任务名称</label>
+
+                                    <input type="text" class="form-control" id="jobName" name="jobName"
+                                           placeholder="任务名称">
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label for="jobGroup" class="control-label">任务分组</label>
+
+                                    <input type="text" class="form-control" id="jobGroup" name="jobGroup"
+                                           placeholder="任务分组">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label">配置列表项</label>
+                                    <select class="form-control" name="spiderId" id="configItem">
+                                        <th:block th:each="item  : ${configItems}">
+                                            <th:block th:if="${itemStat.first==true}">
+                                                <option value="none" disabled="disabled" selected>选择爬虫标识码</option>
+                                            </th:block>
+                                            <option th:value="${item.spiderId}" th:text="${item.uuid}"></option>
+                                        </th:block>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label for="cronExpression" class="control-label">时间表达式</label>
+
+                                    <input type="text" class="form-control" id="cronExpression" name="cronExpression"
+                                           onblur="checkCronValid();"   placeholder="时间表达式">
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="form-group no-margin">
+                                    <label for="description" class="control-label">任务描述</label>
+
+                                    <textarea class="form-control autogrow" name="description" id="description"
+                                              placeholder="任务描述"></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                        <input type="hidden" name="scheduleJobId">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-info save-timer-task">提交</button>
+                    </div>
+                </form>
+            </div>
+            <div class="add-timer-task-msg"></div>
+        </div>
+    </div>
+
+</PageContainerBelow>
+
 </html>

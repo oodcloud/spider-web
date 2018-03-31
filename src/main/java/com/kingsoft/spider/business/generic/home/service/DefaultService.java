@@ -1,25 +1,13 @@
 package com.kingsoft.spider.business.generic.home.service;
 
+import com.kingsoft.spider.business.generic.home.dto.ShowDataDto;
+
+import java.util.List;
+
 /**
  * Created by wangyujie on 2018/1/9.
  */
 public interface DefaultService {
-    Long getBSiteExtopiaCommentCount();
-    Long getBSiteXmqzCommentCount();
-    Long getBSiteMatCommentCount();
+    List<ShowDataDto> getShowData();
 
-    Long getTiebaExtopiaCommentCount();
-    Long getTiebaXmqzCommentCount();
-    Long getTiebaMatCommentCount();
-
-    Long getWeiboExtopiaCommentCount();
-    Long getWeiboXmqzCommentCount();
-    Long getWeiboMatCommentCount();
-    Long getWeiboProducerCommentCount();
-
-    Long getBBSExtopiaCommentCount();
-
-    Long getWechatExtopiaCommentCount();
-    Long getWechatXmqzCommentCount();
-    Long getWechatMatCommentCount();
 }

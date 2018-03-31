@@ -5,6 +5,7 @@ package com.kingsoft.spider.business.spidercore.common;
  */
 public class SpiderConfigEntity {
     private String commonUrl;
+    private String targetUrl;
     private Integer urlRule;
     private Integer growthPattern;
     private Integer startNum;
@@ -17,11 +18,82 @@ public class SpiderConfigEntity {
     private String userAgent;
     private String cookies;
     private Integer sleepTime;
+    private String retryTimes;
     private Integer timeOut;
     private Integer thread;
     private String matchFields;
     private String headers;
     private Long generatedTime;
+    private String dbType;
+    private String dbAddress;
+    private String dbName;
+    private String dbUserName;
+    private String dbPassWord;
+    private String dbTable;
+
+    public String getRetryTimes() {
+        return retryTimes;
+    }
+
+    public void setRetryTimes(String retryTimes) {
+        this.retryTimes = retryTimes;
+    }
+
+    public String getDbTable() {
+        return dbTable;
+    }
+
+    public void setDbTable(String dbTable) {
+        this.dbTable = dbTable;
+    }
+
+    public String getDbPassWord() {
+        return dbPassWord;
+    }
+
+    public void setDbPassWord(String dbPassWord) {
+        this.dbPassWord = dbPassWord;
+    }
+
+    public String getDbType() {
+        return dbType;
+    }
+
+    public void setDbType(String dbType) {
+        this.dbType = dbType;
+    }
+
+    public String getDbAddress() {
+        return dbAddress;
+    }
+
+    public void setDbAddress(String dbAddress) {
+        this.dbAddress = dbAddress;
+    }
+
+    public String getDbName() {
+        return dbName;
+    }
+
+    public void setDbName(String dbName) {
+        this.dbName = dbName;
+    }
+
+    public String getDbUserName() {
+        return dbUserName;
+    }
+
+    public void setDbUserName(String dbUserName) {
+        this.dbUserName = dbUserName;
+    }
+
+    public String getTargetUrl() {
+        return targetUrl;
+    }
+
+    public void setTargetUrl(String targetUrl) {
+        this.targetUrl = targetUrl;
+    }
 
     public Long getGeneratedTime() {
         return generatedTime;

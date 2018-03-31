@@ -7,8 +7,10 @@
         <context:component-scan base-package="com.kingsoft.spider.business"/>
         <aop:aspectj-autoproxy proxy-target-class="true"/>
         <context:annotation-config/>
-
-
+        <bean id="jobFactory" class="com.kingsoft.spider.business.schedule.JobFactory"></bean>
+        <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" >
+                <property name="jobFactory" ref="jobFactory"></property>
+        </bean>
 
 
 </beans>

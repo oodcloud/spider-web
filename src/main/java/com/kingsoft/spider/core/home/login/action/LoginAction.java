@@ -4,6 +4,7 @@ import com.kingsoft.spider.core.common.support.BaseController;
 import com.kingsoft.spider.core.common.support.CommonResponse;
 import com.kingsoft.spider.core.common.support.MD5Utils;
 import com.kingsoft.spider.core.home.login.dao.UserRequest;
+import com.kingsoft.spider.core.home.login.service.LoginService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.crypto.hash.Sha256Hash;
@@ -12,10 +13,12 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.servlet.ShiroHttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -28,6 +31,8 @@ import java.util.Map;
 @Controller
 public class LoginAction extends BaseController {
     private static transient final Logger log = LoggerFactory.getLogger(LoginAction.class);
+    @Autowired
+    private  LoginService loginService;
 
     @RequestMapping("login.html")
     public String login() {
@@ -44,9 +49,9 @@ public class LoginAction extends BaseController {
         }
         UsernamePasswordToken token = new UsernamePasswordToken(userRequest.getUsername(), userRequest.getPassword());
 //        token.setRememberMe(true);
-        log.info("Authenticat Token:" + token.toString());
         try {
             SecurityUtils.getSubject().login(token);
+            loginService.updateGenerateTime(userRequest.getUsername());
             SecurityUtils.getSubject().getSession().setAttribute("user",userRequest.getUsername());
             map.put("statusCode", "200");
             map.put("statusContent", "匹配成功");
@@ -71,10 +76,29 @@ public class LoginAction extends BaseController {
         return commonResponse;
     }
 
-   private void changePassword(){
-//        source为密码 salt为用户名
-       String password =  new Sha256Hash("admin", "admin").toBase64();
+    @RequestMapping("changePassword.html")
+    @ResponseBody
+   public CommonResponse changePassword(@RequestParam("pwd") String pwd){
+       CommonResponse commonResponse=CommonResponse.createCommonResponse();
+        Session session=SecurityUtils.getSubject().getSession();
+       String userName= (String) session.getAttribute("user");
+       // source为密码 salt为用户名
+       String newPassword =  new Sha256Hash(pwd,userName).toBase64();
+       System.out.println(newPassword);
+       Integer count=  loginService.updatePassword(userName,newPassword);
+       if (count==1)
+       {
+           SecurityUtils.getSubject().logout();
+           commonResponse.success();
+       }else {
+           commonResponse.fail("修改密码失败");
+       }
+       return commonResponse;
    }
 
+    public static void main(String[] args) {
+        String newPassword =  new Sha256Hash("abc123456","admin").toBase64();
+        System.out.println(newPassword);
+    }
 
 }

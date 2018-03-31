@@ -10,7 +10,16 @@ public class SiteRequestHeaders {
     private String cookies;
     private String headers;
     private String timeOut;
+    private String retryTimes;
     private String sleepTime;
+
+    public String getRetryTimes() {
+        return retryTimes;
+    }
+
+    public void setRetryTimes(String retryTimes) {
+        this.retryTimes = retryTimes;
+    }
 
     public String getSleepTime() {
         return sleepTime;

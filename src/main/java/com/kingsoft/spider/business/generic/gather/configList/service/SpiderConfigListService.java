@@ -1,7 +1,10 @@
 package com.kingsoft.spider.business.generic.gather.configList.service;
 
+import com.kingsoft.spider.business.generic.gather.configList.dto.SpiderConfigDatabaseDto;
+import com.kingsoft.spider.business.generic.gather.configList.dto.SpiderConfigSaveDto;
 import com.kingsoft.spider.business.spidercore.common.SpiderConfigInfoDto;
 import com.kingsoft.spider.business.generic.gather.configList.dto.SpiderConfigListDto;
+import com.kingsoft.spider.business.spidercore.common.TestPipelineDto;
 
 import java.util.List;
 
@@ -15,7 +18,13 @@ public interface SpiderConfigListService {
      */
     List<SpiderConfigListDto> getList();
 
-    List<SpiderConfigInfoDto> getEditList(Long id);
+    SpiderConfigInfoDto getEditList(Long id);
 
     void delete(Long id);
+
+    void update(SpiderConfigSaveDto spiderConfigEntity);
+
+    List<TestPipelineDto> testRun(SpiderConfigInfoDto entity);
+
+    boolean testDataBase(SpiderConfigDatabaseDto databaseDto);
 }

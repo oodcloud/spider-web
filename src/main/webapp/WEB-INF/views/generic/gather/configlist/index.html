@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::MainContent},~{::script},~{ })">
+      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::MainContent},~{::script},~{::PageContainerBelow})">
 
 <script src="/assets/js/datatables/js/jquery.dataTables.min.js"
         th:src="@{/assets/js/datatables/js/jquery.dataTables.min.js}"></script>
@@ -37,6 +37,7 @@
                             null,
                             null,
                             null,
+                            null,
                             null
                         ]
                     });
@@ -63,6 +64,11 @@
                             修改时间
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
+                            aria-label="标识码"
+                            style="width: 148px;">
+                            标识码
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
                             aria-label="行为" style="width: 199px;">
                             行为
                         </th>
@@ -74,12 +80,12 @@
                             <td th:text="${item.groupName}">小米枪战</td>
                             <td th:text="${item.itemName}">微博</td>
                             <td th:text="${item.modificationTime}">2017-2-9</td>
+                            <td th:text="${item.uuid}"></td>
                             <td>
                                 <a href="#" th:href="'edit.html?id='+${item.id}"  class="btn btn-secondary btn-sm btn-icon icon-left">
                                     修改任务
                                 </a>
-
-                                <a href="#" th:href="'del.html?id='+${item.id}" class="btn btn-turquoise btn-sm btn-icon icon-left">
+                                <a href="#" th:value="${item.id}" class="btn btn-turquoise btn-sm btn-icon icon-left task-delete">
                                     删除任务
                                 </a>
                             </td>
@@ -99,5 +105,28 @@
 
         </div>
     </div>
+    <div class="show-message"></div>
 </MainContent>
+<PageContainerBelow>
+    <div class="modal fade" id="modal-task-del" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">×</button>
+                    <h4 class="modal-title">提示框</h4>
+                </div>
+
+                <div class="modal-body">
+                    是否删除该任务
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">否</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-info execute-task-del">是</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</PageContainerBelow>
 </html>

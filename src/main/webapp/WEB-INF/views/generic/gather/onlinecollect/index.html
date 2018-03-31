@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" th:replace="layout/main-layout ::common(~{::MainContent},~{::script},~{ })">
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout/main-layout ::common(~{::MainContent},~{::script},~{::PageContainerBelow})">
 
 <script src="/assets/js/datatables/js/jquery.dataTables.min.js"
         th:src="@{/assets/js/datatables/js/jquery.dataTables.min.js}"></script>
@@ -10,6 +11,9 @@
         th:src="@{/assets/js/datatables/yadcf/jquery.dataTables.yadcf.js}"></script>
 <script src="/assets/js/datatables/tabletools/dataTables.tableTools.min.js"
         th:src="@{/assets/js/datatables/tabletools/dataTables.tableTools.min.js}"></script>
+<script src="/assets/generic/gather/onlinecollect/index.js"
+        th:src="@{/assets/generic/gather/onlinecollect/index.js}"></script>
+
 <MainContent>
     <!-- Removing search and results count filter -->
     <div class="panel panel-default">
@@ -24,7 +28,6 @@
             </div>
         </div>
         <div class="panel-body">
-
             <script type="text/javascript">
                 jQuery(document).ready(function ($) {
                     $("#example-2").dataTable({
@@ -34,10 +37,10 @@
                             null,
                             null,
                             null,
+                            null,
                             null
                         ]
                     });
-
                 });
             </script>
 
@@ -47,7 +50,7 @@
                     <thead>
                     <tr role="row">
                         <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
-                            aria-label="任务组" style="width: 331px;">
+                            aria-label="任务组" style="width: 231px;">
                             任务组
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
@@ -55,275 +58,117 @@
                             任务名称
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
-                            aria-label="上次采集时间"
+                            aria-label="目标网站"
                             style="width: 397px;">
-                            上次采集时间
+                            目标网站
                         </th>
                         <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="1"
-                            aria-label="Actions: activate to sort column ascending" style="width: 321px;">
+                            aria-label="上次采集时间"
+                            style="width: 197px;">
+                            上次采集时间
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="example-2" rowspan="1" colspan="7"
+                            aria-label="行为" style="width: 297px;">
                             行为
                         </th>
                     </tr>
                     </thead>
 
                     <tbody class="middle-align">
-                    <tr role="row" class="odd">
-                        <td>微博</td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
+                    <tr th:each="item  : ${list}" th:class="${itemStat.odd}? 'odd':'even'" role="row">
                         <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                开始采集
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                停止采集
-                            </a>
+                            <th:block th:text="*{item.groupName}"></th:block>
+                            <th:block th:if="${#strings.equals(item.status,'未启动')}">
+                                <span class="label label-warning" th:id="${item.uuid}" th:text="${item.status}"></span>
+                            </th:block>
+                            <th:block th:if="${#strings.equals(item.status,'初始化')}">
+                                <span class="label label-success" th:id="${item.uuid}" th:text="${item.status}"></span>
+                            </th:block>
+                            <th:block th:if="${#strings.equals(item.status,'运行中')}">
+                                <span class="label label-success" th:id="${item.uuid}" th:text="${item.status}"></span>
+                            </th:block>
+                            <th:block th:if="${#strings.equals(item.status,'已停止')}">
+                                <span class="label label-info" th:id="${item.uuid}" th:text="${item.status}"></span>
+                            </th:block>
                         </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>微博</td>
-                        <td>自由禁区</td>
-                        <td>2018-2-18</td>
+                        <td th:text="${item.itemName}"></td>
+                        <td th:text="${item.domain}"></td>
+                        <td th:text="${item.time}"></td>
                         <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                开始采集
-                            </a>
 
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
+                                <button th:value="${item.id}"
+                                        class="btn  btn-secondary btn-icon btn-icon-standalone btn-sm spider-start">
+                                    <i class="fa-play"></i>
+                                    <span>开始采集</span>
+                                </button>
 
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                停止采集
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>微博</td>
-                        <td>反恐行动</td>
-                        <td>2018-2-28</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                开始采集
-                            </a>
 
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
+                                <button th:value="${item.uuid}"
+                                        class="btn  btn-info btn-icon btn-icon-standalone btn-sm spider-stop">
+                                    <i class="fa-stop"></i>
+                                    <span>停止采集</span>
+                                </button>
 
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                停止采集
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧</td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                开始采集
-                            </a>
+                                <button th:value="${item.uuid}"
+                                        class="btn btn-info btn-icon btn-icon-standalone btn-sm spider-log-show">
+                                    <i class="fa-magnet"></i>
+                                    <span>查看进度</span>
+                                </button>
 
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
 
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                停止采集
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-success">正在运行</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                开始采集
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                停止采集
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-info">暂停</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                开始采集
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                停止采集
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                开始采集
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                停止采集
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                开始采集
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                停止采集
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                开始采集
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                停止采集
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                开始采集
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                停止采集
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                开始采集
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                停止采集
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                开始采集
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                停止采集
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="odd">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                开始采集
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                停止采集
-                            </a>
-                        </td>
-                    </tr>
-                    <tr role="row" class="even">
-                        <td>贴吧 <span class="label label-warning">停止</span></td>
-                        <td>小米枪战</td>
-                        <td>2018-2-18</td>
-                        <td>
-                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left">
-                                开始采集
-                            </a>
-
-                            <a href="#" class="btn btn-turquoise btn-sm btn-icon icon-left">
-                                暂停采集
-                            </a>
-
-                            <a href="#" class="btn btn-info btn-sm btn-icon icon-left">
-                                停止采集
-                            </a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-
+            <div class="show-message">
+            </div>
         </div>
     </div>
 </MainContent>
+
+<PageContainerBelow>
+    <div class="modal fade" id="modal-start" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">×</button>
+                    <h4 class="modal-title">提示框</h4>
+                </div>
+
+                <div class="modal-body">
+                    是否开始采集
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">否</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-info execute-start-spider">是</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-stop" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" aria-hidden="true">×</button>
+                    <h4 class="modal-title">提示框</h4>
+                </div>
+
+                <div class="modal-body">
+                    是否停止采集
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">否</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-info execute-stop-spider">是</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</PageContainerBelow>
+
+
 </html>

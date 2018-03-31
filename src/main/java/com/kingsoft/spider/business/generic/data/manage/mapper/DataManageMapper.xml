@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.kingsoft.spider.business.generic.data.manage.mapper.DataManageMapper">
+    <select id="queryAllDBList"
+            resultType="com.kingsoft.spider.business.generic.data.manage.dto.DataManageDBDto">
+        SELECT id,common_url AS commonUrl,group_name AS groupName,item_name AS itemName FROM spider_config
+    </select>
+    <select id="queryDbInfoById"
+            resultType="com.kingsoft.spider.business.datadb.entity.DataManageDbInfoDto">
+        SELECT db_type AS dbType,db_address AS dbAddress,db_name AS dbName,db_username AS dbUsername ,db_password AS dbPassword,db_table AS dbTable
+        FROM spider_config WHERE id=#{id}
+    </select>
 </mapper>
